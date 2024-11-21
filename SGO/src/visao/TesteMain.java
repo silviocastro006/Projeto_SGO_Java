@@ -85,54 +85,99 @@ public class TesteMain extends javax.swing.JFrame {
     }
     
     
-        private void addMouseListenerToDrawerItem(DrawerItem item) {
-            item.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    // Aqui você pode definir o comportamento do item ao passar o mouse
-                    item.setBackground(Color.decode("#4b526f"));
-                    item.setOpaque(true); // Garante que o fundo será visível
-                    item.setBorderPainted(false); // Opcional: remover a borda do botão, caso queira  // Altera o fundo para cyan
-                    item.setForeground(Color.white);
-                    // Verifica qual item foi ativado e troca o ícone
-                    if(item.getText().equals("Dashboard")){
-                        item.setIcon(new ImageIcon(getClass().getResource("/icones/dashboard_branco.png")));  // Atualiza o ícone
-                    } else if(item.getText().equals("Usuários")){
-                        item.setIcon(new ImageIcon(getClass().getResource("/icones/usuarios_branco.png")));  // Atualiza o ícone
-                    } else if(item.getText().equals("Clientes")){
-                        item.setIcon(new ImageIcon(getClass().getResource("/icones/clientes_branco.png")));  // Atualiza o ícone
-                    } else if(item.getText().equals("Visitas")){
-                        item.setIcon(new ImageIcon(getClass().getResource("/icones/visitas_branco.png")));  // Atualiza o ícone
-                    } else if(item.getText().equals("Orçamentos")){
-                        item.setIcon(new ImageIcon(getClass().getResource("/icones/orcamentos_branco.png")));  // Atualiza o ícone
-                    }
-                }
-                        
-                
-                @Override
-                public void mouseExited(MouseEvent e) {
-                    // Volta para a cor original quando o mouse sai
-                    item.setBackground(Color.WHITE); // Altera o fundo de volta para branco  
-                    item.setForeground(Color.black);
-                    // Verifica qual item foi ativado e troca o ícone
-                    if(item.getText().equals("Dashboard")){
-                        item.setIcon(new ImageIcon(getClass().getResource("/icones/dashboard_azul.png")));  // Atualiza o ícone
-                    } else if(item.getText().equals("Usuários")){
-                        item.setIcon(new ImageIcon(getClass().getResource("/icones/usuarios_azul.png")));  // Atualiza o ícone
-                    } else if(item.getText().equals("Clientes")){
-                        item.setIcon(new ImageIcon(getClass().getResource("/icones/clientes_azul.png")));  // Atualiza o ícone
-                    } else if(item.getText().equals("Visitas")){
-                        item.setIcon(new ImageIcon(getClass().getResource("/icones/visitas_azul.png")));  // Atualiza o ícone
-                    } else if(item.getText().equals("Orçamentos")){
-                        item.setIcon(new ImageIcon(getClass().getResource("/icones/orcamentos_azul.png")));  // Atualiza o ícone
-                    }
-                }
-                
-                
-        });
-
-    }
     
+    private DrawerItem itemSelecionado = null;  // Variável para controlar o item selecionado
+
+    private void addMouseListenerToDrawerItem(DrawerItem item) {
+        item.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                if (item != itemSelecionado) {  // Evita que o item selecionado seja alterado ao passar o mouse
+                    item.setBackground(new Color(75, 82, 111));  // Fundo alterado
+                    item.setOpaque(true);
+                    item.setForeground(Color.white);
+
+                    // Troca o ícone para o estado "mouseover"
+                    updateIconOnHover(item);
+                    item.invalidate();
+                    item.repaint();  // Atualiza o ícone
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                if (item != itemSelecionado) {  // Se não for o item selecionado, retorna ao normal
+                    item.setBackground(Color.WHITE);  // Altera o fundo de volta para branco
+                    item.setForeground(Color.black);
+
+                    // Restaura o ícone ao estado original
+                    restoreIcon(item);
+                    item.invalidate();
+                    item.repaint();  // Atualiza o ícone
+                }
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (itemSelecionado != null) {
+                    // Restaura o estilo do item previamente clicado
+                    restoreItemStyle(itemSelecionado);
+                }
+
+                // Marca o item atual como selecionado
+                itemSelecionado = item;
+                item.setBackground(new Color(75, 82, 111));  // Fundo alterado
+                item.setOpaque(true);
+                item.setForeground(Color.white);
+                updateIconOnHover(item);  // Muda o ícone para o estado "clicado"
+                item.invalidate();
+                item.repaint();  // Atualiza o ícone
+            }
+        });
+    }
+
+    // Atualiza o ícone do item quando o mouse passa por cima
+    private void updateIconOnHover(DrawerItem item) {
+        if (item == dashboard_item) {
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/dashboard_branco.png")));
+        } else if (item == usuario_item) {
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/usuarios_branco.png")));
+        } else if (item == cliente_item) {
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/clientes_branco.png")));
+        } else if (item == visita_item) {
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/visitas_branco.png")));
+        } else if (item == orcamento_item) {
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/orcamentos_branco.png")));
+        }
+    }
+
+    // Restaura o ícone do item ao seu estado original
+    private void restoreIcon(DrawerItem item) {
+        if (item == dashboard_item) {
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/dashboard_azul.png")));
+        } else if (item == usuario_item) {
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/usuarios_azul.png")));
+        } else if (item == cliente_item) {
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/clientes_azul.png")));
+        } else if (item == visita_item) {
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/visitas_azul.png")));
+        } else if (item == orcamento_item) {
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/orcamentos_azul.png")));
+        }
+    }
+
+    // Restaura o estilo do item, se necessário
+    private void restoreItemStyle(DrawerItem item) {
+        item.setBackground(Color.WHITE);  // Altera o fundo de volta para branco
+        item.setForeground(Color.black);
+
+        // Restaura o ícone do item
+        restoreIcon(item);
+        item.invalidate();
+        item.repaint();  // Atualiza o ícone
+    }
+
+  
     
 
     /**
