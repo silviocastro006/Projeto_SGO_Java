@@ -82,6 +82,8 @@ public class TesteMain extends javax.swing.JFrame {
                 .build();
         
         CardPanel.add(teste,"usuarios");
+        CardPanel.setPreferredSize(new java.awt.Dimension(1366, 768)); // Ajuste ao tamanho desejado
+        CardPanel.setSize(getWidth(), getHeight()); // Tamanho baseado no JFrame
         
     }
     
