@@ -4,6 +4,7 @@
  */
 package visao;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -13,7 +14,6 @@ import javaswingdev.drawer.DrawerController;
 import javaswingdev.drawer.DrawerItem;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 /**
  *
@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 public class TesteMain extends javax.swing.JFrame {
 
     public DrawerController drawer;
+    TestePanelPadrao teste = new TestePanelPadrao();
     
     
     // Criação dos itens para o painel
@@ -80,7 +81,7 @@ public class TesteMain extends javax.swing.JFrame {
                 .addFooter(new DrawerItem("Sair").icon(new ImageIcon(getClass().getResource("/icones/desligar.png"))).build())
                 .build();
         
-        
+        CardPanel.add(teste,"usuarios");
         
     }
     
@@ -132,7 +133,13 @@ public class TesteMain extends javax.swing.JFrame {
                 updateIconOnHover(item);  // Muda o ícone para o estado "clicado"
                 item.invalidate();
                 item.repaint();  // Atualiza o ícone
-            }
+                
+                CardLayout layout = (CardLayout) CardPanel.getLayout();
+                if(itemSelecionado == usuario_item){
+                layout.show(CardPanel, "usuarios");
+                }
+                       
+        }
         });
     }
 
@@ -189,8 +196,10 @@ public class TesteMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MenuSup = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
+        CardPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusCycleRoot(false);
@@ -217,22 +226,42 @@ public class TesteMain extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout MenuSupLayout = new javax.swing.GroupLayout(MenuSup);
+        MenuSup.setLayout(MenuSupLayout);
+        MenuSupLayout.setHorizontalGroup(
+            MenuSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MenuSupLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 859, Short.MAX_VALUE)
+                .addComponent(btnFechar))
+        );
+        MenuSupLayout.setVerticalGroup(
+            MenuSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuSupLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(15, 15, 15))
+            .addGroup(MenuSupLayout.createSequentialGroup()
+                .addComponent(btnFechar)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        CardPanel.setLayout(new java.awt.CardLayout());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 689, Short.MAX_VALUE)
-                .addComponent(btnFechar))
+            .addComponent(MenuSup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(CardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(btnFechar))
-                .addGap(0, 443, Short.MAX_VALUE))
+                .addComponent(MenuSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -287,6 +316,8 @@ public class TesteMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel CardPanel;
+    private javax.swing.JPanel MenuSup;
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
