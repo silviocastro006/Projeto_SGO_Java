@@ -43,11 +43,11 @@ public class TesteMain extends javax.swing.JFrame {
         setAlwaysOnTop(true); // (Opcional) Coloca a janela sempre no topo
 
         // Inserindo o icone para cada um
-        dashboard_item.icon(new ImageIcon(getClass().getResource("/icones/dashboard_azul.png"))).build();
-        usuario_item.icon(new ImageIcon(getClass().getResource("/icones/usuarios_azul.png"))).build();
-        cliente_item.icon(new ImageIcon(getClass().getResource("/icones/clientes_azul.png"))).build();
-        visita_item.icon(new ImageIcon(getClass().getResource("/icones/visitas_azul.png"))).build();
-        orcamento_item.icon(new ImageIcon(getClass().getResource("/icones/orcamentos_azul.png"))).build();
+        dashboard_item.icon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/dashboard_azul.png"))).build();
+        usuario_item.icon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/usuarios_azul.png"))).build();
+        cliente_item.icon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/clientes_azul.png"))).build();
+        visita_item.icon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/visitas_azul.png"))).build();
+        orcamento_item.icon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/orcamentos_azul.png"))).build();
         
         
         // Adicionando o MouseListener para cada item
@@ -78,7 +78,7 @@ public class TesteMain extends javax.swing.JFrame {
                 .addChild(visita_item)
                 .addChild(orcamento_item)
                 .itemHeight(70)
-                .addFooter(new DrawerItem("Sair").icon(new ImageIcon(getClass().getResource("/icones/desligar.png"))).build())
+                .addFooter(new DrawerItem("Sair").icon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/desligar.png"))).build())
                 .build();
         
         CardPanel.add(teste,"usuarios");
@@ -148,30 +148,30 @@ public class TesteMain extends javax.swing.JFrame {
     // Atualiza o ícone do item quando o mouse passa por cima
     private void updateIconOnHover(DrawerItem item) {
         if (item == dashboard_item) {
-            item.setIcon(new ImageIcon(getClass().getResource("/icones/dashboard_branco.png")));
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/dashboard_branco.png")));
         } else if (item == usuario_item) {
-            item.setIcon(new ImageIcon(getClass().getResource("/icones/usuarios_branco.png")));
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/usuarios_branco.png")));
         } else if (item == cliente_item) {
-            item.setIcon(new ImageIcon(getClass().getResource("/icones/clientes_branco.png")));
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/clientes_branco.png")));
         } else if (item == visita_item) {
-            item.setIcon(new ImageIcon(getClass().getResource("/icones/visitas_branco.png")));
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/visitas_branco.png")));
         } else if (item == orcamento_item) {
-            item.setIcon(new ImageIcon(getClass().getResource("/icones/orcamentos_branco.png")));
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/orcamentos_branco.png")));
         }
     }
 
     // Restaura o ícone do item ao seu estado original
     private void restoreIcon(DrawerItem item) {
         if (item == dashboard_item) {
-            item.setIcon(new ImageIcon(getClass().getResource("/icones/dashboard_azul.png")));
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/dashboard_azul.png")));
         } else if (item == usuario_item) {
-            item.setIcon(new ImageIcon(getClass().getResource("/icones/usuarios_azul.png")));
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/usuarios_azul.png")));
         } else if (item == cliente_item) {
-            item.setIcon(new ImageIcon(getClass().getResource("/icones/clientes_azul.png")));
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/clientes_azul.png")));
         } else if (item == visita_item) {
-            item.setIcon(new ImageIcon(getClass().getResource("/icones/visitas_azul.png")));
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/visitas_azul.png")));
         } else if (item == orcamento_item) {
-            item.setIcon(new ImageIcon(getClass().getResource("/icones/orcamentos_azul.png")));
+            item.setIcon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/orcamentos_azul.png")));
         }
     }
 
