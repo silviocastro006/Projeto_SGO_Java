@@ -23,6 +23,7 @@ public class TesteMain extends javax.swing.JFrame {
 
     public DrawerController drawer;
     TestePanelPadrao teste = new TestePanelPadrao();
+    private DrawerItem itemSelecionado = null;  // Variável para controlar o item selecionado
     
     
     // Criação dos itens para o painel
@@ -87,9 +88,6 @@ public class TesteMain extends javax.swing.JFrame {
         
     }
     
-    
-    
-    private DrawerItem itemSelecionado = null;  // Variável para controlar o item selecionado
 
     private void addMouseListenerToDrawerItem(DrawerItem item) {
         item.addMouseListener(new MouseAdapter() {
@@ -185,7 +183,8 @@ public class TesteMain extends javax.swing.JFrame {
         item.invalidate();
         item.repaint();  // Atualiza o ícone
     }
-
+    
+    
   
     
 
@@ -204,19 +203,28 @@ public class TesteMain extends javax.swing.JFrame {
         CardPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(getBackground());
         setFocusCycleRoot(false);
         setPreferredSize(new java.awt.Dimension(1366, 768));
         setResizable(false);
 
+        MenuSup.setBackground(Color.decode("#4b526f"));
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("|||");
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/fechar_ico.png"))); // NOI18N
+        btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/fechar_ico.png"))); // NOI18N
         btnFechar.setBorder(null);
         btnFechar.setBorderPainted(false);
         btnFechar.setContentAreaFilled(false);
@@ -233,22 +241,17 @@ public class TesteMain extends javax.swing.JFrame {
         MenuSupLayout.setHorizontalGroup(
             MenuSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuSupLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 859, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 853, Short.MAX_VALUE)
                 .addComponent(btnFechar))
         );
         MenuSupLayout.setVerticalGroup(
             MenuSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuSupLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(15, 15, 15))
-            .addGroup(MenuSupLayout.createSequentialGroup()
-                .addComponent(btnFechar)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(btnFechar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        CardPanel.setBackground(new java.awt.Color(255, 255, 255));
         CardPanel.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -262,8 +265,9 @@ public class TesteMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(MenuSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(CardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -311,6 +315,7 @@ public class TesteMain extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new TesteMain().setVisible(true);
             }

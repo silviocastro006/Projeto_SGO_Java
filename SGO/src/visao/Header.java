@@ -30,7 +30,7 @@ public class Header extends javax.swing.JPanel {
         Graphics2D g2d = (Graphics2D) g;
 
         // Definir os pontos de cores
-        float[] fractions = {5.0f, 2.0f, 1.0f};  // Posições das cores no gradiente
+        float[] fractions = {0.0f, 0.3f, 1.0f};  // Posições das cores no gradiente
         Color[] colors = {Color.decode("#bec5e1"), Color.decode("#68739d"), Color.decode("#4b526f")};  // Cores do gradiente
 
         // Criar o gradiente de 3 cores da esquerda para a direita
