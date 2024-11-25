@@ -6,6 +6,7 @@ package visao;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -35,9 +36,10 @@ public class TesteMain extends javax.swing.JFrame {
     
     
     public TesteMain() {
+        
+        // Configurações do menu principal
         setUndecorated(true); // Remover a barra de título
         initComponents();
-        btnFechar.setBackground(new Color(255, 255, 255, 0));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(false);
         setLocationRelativeTo(null); // Mantém a janela centralizada
@@ -69,7 +71,7 @@ public class TesteMain extends javax.swing.JFrame {
         orcamento_item.setFont(fonte_label);
         
         
-                
+        // Criando o drawer + animação        
         drawer = Drawer.newDrawer(this)
                 .header(new Header())
                 .separator(20, new Color(255,255,255))
@@ -82,9 +84,14 @@ public class TesteMain extends javax.swing.JFrame {
                 .addFooter(new DrawerItem("Sair").icon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/desligar.png"))).build())
                 .build();
         
+        
+        // Adicionando a tela usuários no CardPanel
         CardPanel.add(teste,"usuarios");
         CardPanel.setPreferredSize(new java.awt.Dimension(1366, 768)); // Ajuste ao tamanho desejado
         CardPanel.setSize(getWidth(), getHeight()); // Tamanho baseado no JFrame
+        
+        // Configurações dos botões da tela
+        
         
     }
     
@@ -198,7 +205,7 @@ public class TesteMain extends javax.swing.JFrame {
     private void initComponents() {
 
         MenuSup = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnMenu = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
         CardPanel = new javax.swing.JPanel();
 
@@ -210,26 +217,25 @@ public class TesteMain extends javax.swing.JFrame {
 
         MenuSup.setBackground(Color.decode("#4b526f"));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("|||");
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnMenu.setBackground(Color.decode("#303a5f"));
+        btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/menu_30.png"))); // NOI18N
+        btnMenu.setToolTipText("Abre menu");
+        btnMenu.setBorder(null);
+        btnMenu.setBorderPainted(false);
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnMenu.setIconTextGap(10);
+        btnMenu.setMargin(new java.awt.Insets(14, 14, 14, 14));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnMenuActionPerformed(evt);
             }
         });
 
-        btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/fechar_ico.png"))); // NOI18N
-        btnFechar.setBorder(null);
-        btnFechar.setBorderPainted(false);
-        btnFechar.setContentAreaFilled(false);
-        btnFechar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnFechar.setFocusPainted(false);
+        btnFechar.setBackground(Color.decode("#495273"));
+        btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/fechar_40.png"))); // NOI18N
+        btnFechar.setToolTipText("Fechar Sistema");
+        btnFechar.setOpaque(true);
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFecharActionPerformed(evt);
@@ -241,17 +247,19 @@ public class TesteMain extends javax.swing.JFrame {
         MenuSupLayout.setHorizontalGroup(
             MenuSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuSupLayout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 853, Short.MAX_VALUE)
-                .addComponent(btnFechar))
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 806, Short.MAX_VALUE)
+                .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         MenuSupLayout.setVerticalGroup(
             MenuSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnFechar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
         );
 
         CardPanel.setBackground(new java.awt.Color(255, 255, 255));
+        CardPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CardPanel.setFocusable(false);
         CardPanel.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -274,13 +282,13 @@ public class TesteMain extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         if(drawer.isShow()){
             drawer.hide();
         } else {
             drawer.show();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         System.exit(0);
@@ -326,6 +334,6 @@ public class TesteMain extends javax.swing.JFrame {
     private javax.swing.JPanel CardPanel;
     private javax.swing.JPanel MenuSup;
     private javax.swing.JButton btnFechar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnMenu;
     // End of variables declaration//GEN-END:variables
 }
