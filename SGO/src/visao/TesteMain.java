@@ -222,6 +222,7 @@ public class TesteMain extends javax.swing.JFrame {
         btnMenu.setToolTipText("Abre menu");
         btnMenu.setBorder(null);
         btnMenu.setBorderPainted(false);
+        btnMenu.setContentAreaFilled(false);
         btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMenu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnMenu.setIconTextGap(10);
@@ -235,6 +236,7 @@ public class TesteMain extends javax.swing.JFrame {
         btnFechar.setBackground(Color.decode("#495273"));
         btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/fechar_40.png"))); // NOI18N
         btnFechar.setToolTipText("Fechar Sistema");
+        btnFechar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnFechar.setOpaque(true);
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,8 +249,8 @@ public class TesteMain extends javax.swing.JFrame {
         MenuSupLayout.setHorizontalGroup(
             MenuSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuSupLayout.createSequentialGroup()
-                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 806, Short.MAX_VALUE)
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1281, Short.MAX_VALUE)
                 .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         MenuSupLayout.setVerticalGroup(

@@ -58,8 +58,8 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="btnMenu" min="-2" pref="100" max="-2" attributes="0"/>
-                  <EmptySpace pref="806" max="32767" attributes="0"/>
+                  <Component id="btnMenu" min="-2" pref="51" max="-2" attributes="0"/>
+                  <EmptySpace pref="1281" max="32767" attributes="0"/>
                   <Component id="btnFechar" min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -85,6 +85,7 @@
               <Border info="null"/>
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
             </Property>
@@ -107,6 +108,9 @@
               <Image iconType="3" name="/icones/icones_pequenos/fechar_40.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Fechar Sistema"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
