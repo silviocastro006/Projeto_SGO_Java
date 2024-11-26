@@ -4,60 +4,75 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 
 public class Conexao {
     
-    //Atributo de conexão com o banco de dados
-    private Connection conexao;
+    // ============ Atributos Conexão ============
     
     // url de conexão
-    private String url = "jdbc:mysql://localhost:3306/sgo";
+    private static final String url = "jdbc:mysql://localhost:3306/sgo";
     
     // usuário do banco
-    private String user = "root";
+    private static final String user = "root";
     
     // senha do usuário
-    private String senha = "root";
+    private static final String senha = "root";
     
     // driver para conexão
-    private String driver = "com.mysql.cj.jdbc.Driver";
+    private static final String driver = "com.mysql.cj.jdbc.Driver";
     
     
-    /**
-     * @return true - a conexão foi realizada
-     */
-    public boolean conectar(){
-        try{
-            
-            // comando para abrir a biblioteca do MySql
-            Class.forName(driver);
-            
-            // tentar a conexão
-            conexao = DriverManager.getConnection(url, user, senha);
-            System.out.println("Conectado");
-            
-            // fechar a conexão
-            conexao.close();
-            
-        }catch(SQLException e){
-            System.out.println("Erro ao conectar ao banco: "+e.getMessage());
-        }catch(ClassNotFoundException e){
-            System.out.println("Driver não encontrado: "+e.getMessage());
-        }
-        return true;
-    }
+    // ============ Metodos Conexão ============
     
-    public boolean desconectar(){
+    // Método para pegar o resultado da conexão do banco
+    public static Connection getConexao(){
         try {
-            if(this.conexao.isClosed()==false){
-                this.conexao.close();
-            }
-        } catch (SQLException e) {
-            System.out.println("Erro ao desconectar ao banco: "+ e.getMessage());
+            
+            Class.forName(driver);
+            return (Connection) DriverManager.getConnection(url,user,senha);
+            
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException("Erro na conexão do banco: "+e.getMessage());
         }
-        System.out.println("Desconectou com o banco de dados"); 
-        return true;
     }
     
+    // Método sobrecarga para fechar a conexão do banco
+    public static void fecharConexao(Connection conn){
+        if(conn != null){ // se existir conexão
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                throw new RuntimeException("Ocorreu um erro no fechamento da conexão: "+e.getMessage());
+            }
+        }
+    }
+    
+    
+    // Método sobrecarga para fechar a conexão do banco e do PreparedStatement
+    public static void fecharConexao(Connection conn, PreparedStatement stmt){
+        if(stmt != null){ // se existir conexão
+            try {
+                stmt.close();
+            } catch (SQLException e) {
+                throw new RuntimeException("Ocorreu um erro no fechamento da conexão: "+e.getMessage());
+            }
+        }
+            fecharConexao(conn);
+    }
+    
+    
+    // Método sobrecarga para fechar a conexão do banco, PreparedStatement e ResultSet
+    public static void fecharConexao(Connection conn, PreparedStatement stmt, ResultSet rs){
+        if(rs != null){ // se existir conexão
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                throw new RuntimeException("Ocorreu um erro no fechamento da conexão: "+e.getMessage());
+            }
+        }
+            fecharConexao(conn, stmt);
+    }
 }
