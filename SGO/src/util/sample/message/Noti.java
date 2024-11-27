@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package sample.message;
+package util.sample.message;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -15,7 +15,7 @@ import static java.lang.reflect.Array.get;
 import static java.nio.file.Paths.get;
 import javax.swing.JPanel;
 import static javax.swing.UIManager.get;
-import mensage.notificar.notificacao;
+import util.mensage.notificar.notificacao;
 import raven.glasspanepopup.GlassPanePopup;
 
 public final class Noti extends javax.swing.JPanel {
@@ -30,16 +30,21 @@ public final class Noti extends javax.swing.JPanel {
     }
     
     public void ConfigurarNotificacao() {
-        notificacao.mostrarNotificacao("Concluido!", new Color(48, 170, 63));
+        notificacao.mostrarNotificacao("Concluido!", new Color(51,51,51));
     }
     @SuppressWarnings("unchecked")
+    
+    
+    public void eventoConfirm(ActionListener evento){
+        btnConfirmar.addActionListener(evento);
+    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
         txtPainel = new javax.swing.JTextPane();
-        cmdCancel = new sample.message.Button();
-        cmdConfirm = new sample.message.Button();
+        btnConfirmar = new util.sample.message.Button();
+        btnCancelar = new util.sample.message.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(25, 25, 25, 25));
@@ -48,25 +53,24 @@ public final class Noti extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(75, 74, 74));
         jLabel1.setText("Ola, esquisito");
 
-        txtPainel.setBackground(new java.awt.Color(255, 255, 255));
         txtPainel.setForeground(new java.awt.Color(98, 98, 98));
         txtPainel.setText("Para de ficar bisbilhotando as coisa dos outros, seu estranho.");
 
-        cmdCancel.setBackground(new java.awt.Color(255, 0, 0));
-        cmdCancel.setForeground(new java.awt.Color(255, 255, 255));
-        cmdCancel.setText("Cancelar");
-        cmdCancel.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmar.setBackground(new java.awt.Color(0, 153, 51));
+        btnConfirmar.setForeground(new java.awt.Color(255, 255, 255));
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdCancelActionPerformed(evt);
+                btnConfirmarActionPerformed(evt);
             }
         });
 
-        cmdConfirm.setBackground(new java.awt.Color(48, 170, 63));
-        cmdConfirm.setForeground(new java.awt.Color(255, 255, 255));
-        cmdConfirm.setText("Confirmar");
-        cmdConfirm.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBackground(new java.awt.Color(164, 0, 0));
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdConfirmActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -80,13 +84,14 @@ public final class Noti extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(cmdConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtPainel, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(txtPainel, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,28 +100,25 @@ public final class Noti extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPainel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmdConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdConfirmActionPerformed
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         
-    }//GEN-LAST:event_cmdConfirmActionPerformed
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
-    private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed
-        GlassPanePopup.closePopupLast();
-    }//GEN-LAST:event_cmdCancelActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-    public void eventoConfirm(ActionListener evento){
-        cmdConfirm.addActionListener(evento);
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private sample.message.Button cmdCancel;
-    private sample.message.Button cmdConfirm;
+    private util.sample.message.Button btnCancelar;
+    private util.sample.message.Button btnConfirmar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextPane txtPainel;
     // End of variables declaration//GEN-END:variables

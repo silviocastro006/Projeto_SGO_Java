@@ -34,9 +34,7 @@ public class TestePanelPadrao extends javax.swing.JPanel {
         // Centralizando texto na tabela
         DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) tblConteudo.getTableHeader().getDefaultRenderer();
         renderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-        
-       
-     
+
     }
     
     @Override
@@ -60,6 +58,10 @@ public class TestePanelPadrao extends javax.swing.JPanel {
         g2d.fillRect(0, 0, getWidth(), getHeight());
     }
 
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,12 +76,12 @@ public class TestePanelPadrao extends javax.swing.JPanel {
         pnlPesquisa = new javax.swing.JPanel();
         txtpesquisa = new javax.swing.JTextField();
         lblLupa = new javax.swing.JLabel();
-        pnlButton = new javax.swing.JPanel();
-        btnCadastrar1 = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JButton();
         scrlPane = new util.elementos.ScrollPaneWin11();
         tblConteudo = new javax.swing.JTable();
+        pnlBotoes = new javax.swing.JPanel();
+        btnCadastrar = new util.sample.message.Button();
+        btnEditar = new util.sample.message.Button();
+        btnExcluir = new util.sample.message.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setOpaque(false);
@@ -124,79 +126,6 @@ public class TestePanelPadrao extends javax.swing.JPanel {
             pnlPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblLupa, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(txtpesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        pnlButton.setOpaque(false);
-
-        btnCadastrar1.setBackground(new java.awt.Color(58, 109, 43));
-        btnCadastrar1.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
-        btnCadastrar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnCadastrar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/add_32.png"))); // NOI18N
-        btnCadastrar1.setText("Cadastrar");
-        btnCadastrar1.setActionCommand("");
-        btnCadastrar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCadastrar1.setFocusPainted(false);
-        btnCadastrar1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnCadastrar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrar1ActionPerformed(evt);
-            }
-        });
-
-        btnEditar.setBackground(new java.awt.Color(40, 103, 112));
-        btnEditar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/editar_32.png"))); // NOI18N
-        btnEditar.setText("Editar");
-        btnEditar.setActionCommand("");
-        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditar.setFocusPainted(false);
-        btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnEditar.setIconTextGap(10);
-        btnEditar.setInheritsPopupMenu(true);
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
-        btnExcluir.setBackground(new java.awt.Color(120, 32, 32));
-        btnExcluir.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
-        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
-        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/lixo_32.png"))); // NOI18N
-        btnExcluir.setText("Excluir");
-        btnExcluir.setActionCommand("");
-        btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnExcluir.setFocusPainted(false);
-        btnExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnExcluir.setIconTextGap(10);
-        btnExcluir.setInheritsPopupMenu(true);
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnlButtonLayout = new javax.swing.GroupLayout(pnlButton);
-        pnlButton.setLayout(pnlButtonLayout);
-        pnlButtonLayout.setHorizontalGroup(
-            pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlButtonLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnCadastrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        pnlButtonLayout.setVerticalGroup(
-            pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlButtonLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         scrlPane.setBackground(new java.awt.Color(255, 255, 255));
@@ -299,6 +228,50 @@ public class TestePanelPadrao extends javax.swing.JPanel {
             tblConteudo.getColumnModel().getColumn(7).setHeaderValue("Cargo");
         }
 
+        pnlBotoes.setOpaque(false);
+
+        btnCadastrar.setBackground(new java.awt.Color(58, 109, 43));
+        btnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/add_32.png"))); // NOI18N
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCadastrarMouseEntered(evt);
+            }
+        });
+
+        btnEditar.setBackground(new java.awt.Color(40, 103, 112));
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/editar_32.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+
+        btnExcluir.setBackground(new java.awt.Color(120, 32, 32));
+        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/lixo_32.png"))); // NOI18N
+        btnExcluir.setText("Excluir");
+        btnExcluir.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+
+        javax.swing.GroupLayout pnlBotoesLayout = new javax.swing.GroupLayout(pnlBotoes);
+        pnlBotoes.setLayout(pnlBotoesLayout);
+        pnlBotoesLayout.setHorizontalGroup(
+            pnlBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBotoesLayout.createSequentialGroup()
+                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        pnlBotoesLayout.setVerticalGroup(
+            pnlBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -307,19 +280,19 @@ public class TestePanelPadrao extends javax.swing.JPanel {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrlPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblIcon)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTitulo)
                         .addGap(65, 65, 65)
-                        .addComponent(pnlPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(pnlPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(84, Short.MAX_VALUE)
+                .addContainerGap(79, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -328,9 +301,9 @@ public class TestePanelPadrao extends javax.swing.JPanel {
                         .addComponent(pnlPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(39, 39, 39)
                 .addComponent(scrlPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(pnlButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addGap(30, 30, 30)
+                .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -338,27 +311,18 @@ public class TestePanelPadrao extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtpesquisaActionPerformed
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnCadastrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCadastrar1ActionPerformed
-
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnExcluirActionPerformed
+    private void btnCadastrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseEntered
+    }//GEN-LAST:event_btnCadastrarMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrar1;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnExcluir;
+    private util.sample.message.Button btnCadastrar;
+    private util.sample.message.Button btnEditar;
+    private util.sample.message.Button btnExcluir;
     private javax.swing.JLabel lblIcon;
     private javax.swing.JLabel lblLupa;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JPanel pnlButton;
+    private javax.swing.JPanel pnlBotoes;
     private javax.swing.JPanel pnlPesquisa;
     private javax.swing.JScrollPane scrlPane;
     private javax.swing.JTable tblConteudo;

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sample.message;
+package util.sample.message;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -21,10 +21,11 @@ import javax.swing.border.EmptyBorder;
 public class Button extends JButton{
 
     private boolean mousePress;
+    private boolean mouseOver;
     
     public Button() {
         setContentAreaFilled(false);
-        setBorder(new EmptyBorder(7, 5, 7, 5));
+        setBorder(new EmptyBorder(7, 5, 7, 6));
         addMouseListener(new MouseAdapter() {
             
             @Override
@@ -41,6 +42,20 @@ public class Button extends JButton{
                 }
             }
             
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // Quando o mouse entra, muda a cor para 8, 0, 50
+                mouseOver = true;
+                repaint(); // Repaint the button to apply the color change
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // Quando o mouse sai, volta para a cor original
+                mouseOver = false;
+                repaint(); // Repaint the button to revert the color
+            }
+            
         });
     }
 
@@ -50,7 +65,9 @@ public class Button extends JButton{
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         if (mousePress) {
             g2.setColor(getBackground().darker());
-        } else {
+        } else if (mouseOver){
+             g2.setColor(new java.awt.Color(8, 0, 50));
+        } else{
             g2.setColor(getBackground());
         }
        
@@ -59,6 +76,6 @@ public class Button extends JButton{
 
         super.paintComponent(g); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-    
+        
     
 }
