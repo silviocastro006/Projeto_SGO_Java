@@ -161,13 +161,15 @@ public class TesteMain extends javax.swing.JFrame {
         }
     }
     
+    
+    // Método que recupera todos os itens como padrão
     private void restoreAllItemsStyle() {
-    restoreItemStyle(dashboard_item);
-    restoreItemStyle(usuario_item);
-    restoreItemStyle(cliente_item);
-    restoreItemStyle(visita_item);
-    restoreItemStyle(orcamento_item);
-}
+        restoreItemStyle(dashboard_item);
+        restoreItemStyle(usuario_item);
+        restoreItemStyle(cliente_item);
+        restoreItemStyle(visita_item);
+        restoreItemStyle(orcamento_item);
+    }
 
     // Restaura o estilo do item, se necessário
     private void restoreItemStyle(DrawerItem item) {
@@ -177,12 +179,9 @@ public class TesteMain extends javax.swing.JFrame {
         // Restaura o ícone do item
         restoreIcon(item);
         item.invalidate();
-        item.repaint();  // Atualiza o ícone
+        item.repaint();  
     }
-    
-    
-  
-    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
