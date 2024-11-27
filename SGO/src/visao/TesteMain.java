@@ -4,9 +4,9 @@
  */
 package visao;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -15,6 +15,7 @@ import javaswingdev.drawer.DrawerController;
 import javaswingdev.drawer.DrawerItem;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 /**
  *
@@ -83,7 +84,7 @@ public class TesteMain extends javax.swing.JFrame {
                 .itemHeight(70)
                 .addFooter(new DrawerItem("Sair").icon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/desligar.png"))).build())
                 .build();
-        
+
         
         // Adicionando a tela usuários no CardPanel
         CardPanel.add(teste,"usuarios");
@@ -97,61 +98,34 @@ public class TesteMain extends javax.swing.JFrame {
     
 
     private void addMouseListenerToDrawerItem(DrawerItem item) {
-        item.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                if (item != itemSelecionado) {  // Evita que o item selecionado seja alterado ao passar o mouse
-                    item.setBackground(new Color(75, 82, 111));  // Fundo alterado
-                    item.setOpaque(true);
-                    item.setForeground(Color.white);
+    item.addMouseListener(new MouseAdapter() {
 
-                    // Troca o ícone para o estado "mouseover"
-                    updateIconOnHover(item);
-                    item.invalidate();
-                    item.repaint();  // Atualiza o ícone
-                }
-            }
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            // Restaura o estilo de todos os itens
+            restoreAllItemsStyle();
 
-            @Override
-            public void mouseExited(MouseEvent e) {
-                if (item != itemSelecionado) {  // Se não for o item selecionado, retorna ao normal
-                    item.setBackground(Color.WHITE);  // Altera o fundo de volta para branco
-                    item.setForeground(Color.black);
+            // Aplica o estilo ao item selecionado
+            itemSelecionado = item;
+            item.setBackground(new Color(75, 82, 111)); // Fundo alterado
+            item.setOpaque(true);
+            item.setForeground(Color.WHITE); // Texto branco
+            updateIconOnClick(item); // Atualiza o ícone do item selecionado
 
-                    // Restaura o ícone ao estado original
-                    restoreIcon(item);
-                    item.invalidate();
-                    item.repaint();  // Atualiza o ícone
-                }
-            }
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (itemSelecionado != null) {
-                    // Restaura o estilo do item previamente clicado
-                    restoreItemStyle(itemSelecionado);
-                }
-
-                // Marca o item atual como selecionado
-                itemSelecionado = item;
-                item.setBackground(new Color(75, 82, 111));  // Fundo alterado
-                item.setOpaque(true);
-                item.setForeground(Color.white);
-                updateIconOnHover(item);  // Muda o ícone para o estado "clicado"
-                item.invalidate();
-                item.repaint();  // Atualiza o ícone
-                
-                CardLayout layout = (CardLayout) CardPanel.getLayout();
-                if(itemSelecionado == usuario_item){
+            // Exibe o painel correspondente
+            CardLayout layout = (CardLayout) CardPanel.getLayout();
+            if (item == usuario_item) {
                 layout.show(CardPanel, "usuarios");
-                }
-                       
+            }
+
+            item.invalidate();
+            item.repaint(); // Atualiza o componente
         }
-        });
-    }
+    });
+}
 
     // Atualiza o ícone do item quando o mouse passa por cima
-    private void updateIconOnHover(DrawerItem item) {
+    private void updateIconOnClick(DrawerItem item) {
         if (item == dashboard_item) {
             item.setIcon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/dashboard_branco.png")));
         } else if (item == usuario_item) {
@@ -179,6 +153,14 @@ public class TesteMain extends javax.swing.JFrame {
             item.setIcon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/orcamentos_azul.png")));
         }
     }
+    
+    private void restoreAllItemsStyle() {
+    restoreItemStyle(dashboard_item);
+    restoreItemStyle(usuario_item);
+    restoreItemStyle(cliente_item);
+    restoreItemStyle(visita_item);
+    restoreItemStyle(orcamento_item);
+}
 
     // Restaura o estilo do item, se necessário
     private void restoreItemStyle(DrawerItem item) {
@@ -236,8 +218,10 @@ public class TesteMain extends javax.swing.JFrame {
         btnFechar.setBackground(Color.decode("#495273"));
         btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/fechar_40.png"))); // NOI18N
         btnFechar.setToolTipText("Fechar Sistema");
+        btnFechar.setBorder(null);
+        btnFechar.setBorderPainted(false);
+        btnFechar.setContentAreaFilled(false);
         btnFechar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnFechar.setOpaque(true);
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFecharActionPerformed(evt);
@@ -300,28 +284,17 @@ public class TesteMain extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TesteMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TesteMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TesteMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TesteMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+
+        FlatLightLaf.setup();
+        UIManager.put("Button.arc", 15);
+        UIManager.put("Button.innerFocusWidth", 0);
+        UIManager.put("Panel.Background", new Color(51,51,51));
+        
+
+        
+        
+
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
