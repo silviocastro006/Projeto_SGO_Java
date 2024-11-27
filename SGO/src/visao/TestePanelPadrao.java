@@ -9,7 +9,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LinearGradientPaint;
-import javax.swing.table.JTableHeader;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class TestePanelPadrao extends javax.swing.JPanel {
 
@@ -24,13 +24,17 @@ public class TestePanelPadrao extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1366, 768)); // Ajuste para o tamanho desejado
         setSize(getWidth(), getHeight());
         
-        //
+        //Configurando a aparência da tabela
         
         tblConteudo.getTableHeader().setBackground(Color.decode("#303a5f"));
-        tblConteudo.getTableHeader().setForeground(Color.white);
-        tblConteudo.getTableHeader().setFont(new Font("openSans_regular", Font.PLAIN, 18));
+        tblConteudo.getTableHeader().setForeground(Color.black);
+        tblConteudo.getTableHeader().setFont(new Font("OpenSans-Regular", Font.PLAIN, 16));
         
-              
+        
+        // Centralizando texto na tabela
+        DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) tblConteudo.getTableHeader().getDefaultRenderer();
+        renderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+        
        
      
     }
@@ -70,11 +74,11 @@ public class TestePanelPadrao extends javax.swing.JPanel {
         pnlPesquisa = new javax.swing.JPanel();
         txtpesquisa = new javax.swing.JTextField();
         lblLupa = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        pnlButton = new javax.swing.JPanel();
         btnCadastrar1 = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
-        scrlPane = new javax.swing.JScrollPane();
+        scrlPane = new util.elementos.ScrollPaneWin11();
         tblConteudo = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -122,7 +126,7 @@ public class TestePanelPadrao extends javax.swing.JPanel {
             .addComponent(txtpesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jPanel1.setOpaque(false);
+        pnlButton.setOpaque(false);
 
         btnCadastrar1.setBackground(new java.awt.Color(58, 109, 43));
         btnCadastrar1.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
@@ -173,11 +177,11 @@ public class TestePanelPadrao extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlButtonLayout = new javax.swing.GroupLayout(pnlButton);
+        pnlButton.setLayout(pnlButtonLayout);
+        pnlButtonLayout.setHorizontalGroup(
+            pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlButtonLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnCadastrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -185,15 +189,17 @@ public class TestePanelPadrao extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlButtonLayout.setVerticalGroup(
+            pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlButtonLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
+
+        scrlPane.setBackground(new java.awt.Color(255, 255, 255));
 
         tblConteudo.setAutoCreateRowSorter(true);
         tblConteudo.setBackground(new java.awt.Color(249, 249, 249));
@@ -280,9 +286,18 @@ public class TestePanelPadrao extends javax.swing.JPanel {
         tblConteudo.setRowHeight(30);
         tblConteudo.setSelectionBackground(new java.awt.Color(207, 211, 225));
         tblConteudo.setShowGrid(true);
-        tblConteudo.setShowVerticalLines(true);
         tblConteudo.getTableHeader().setReorderingAllowed(false);
         scrlPane.setViewportView(tblConteudo);
+        if (tblConteudo.getColumnModel().getColumnCount() > 0) {
+            tblConteudo.getColumnModel().getColumn(0).setHeaderValue("Codigo");
+            tblConteudo.getColumnModel().getColumn(1).setHeaderValue("Nome");
+            tblConteudo.getColumnModel().getColumn(2).setHeaderValue("CPF");
+            tblConteudo.getColumnModel().getColumn(3).setHeaderValue("Endereço");
+            tblConteudo.getColumnModel().getColumn(4).setHeaderValue("Telefone");
+            tblConteudo.getColumnModel().getColumn(5).setHeaderValue("Data Nascimento");
+            tblConteudo.getColumnModel().getColumn(6).setHeaderValue("Email");
+            tblConteudo.getColumnModel().getColumn(7).setHeaderValue("Cargo");
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -292,7 +307,7 @@ public class TestePanelPadrao extends javax.swing.JPanel {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrlPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblIcon)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -313,9 +328,9 @@ public class TestePanelPadrao extends javax.swing.JPanel {
                         .addComponent(pnlPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(39, 39, 39)
                 .addComponent(scrlPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addGap(42, 42, 42)
+                .addComponent(pnlButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -340,10 +355,10 @@ public class TestePanelPadrao extends javax.swing.JPanel {
     private javax.swing.JButton btnCadastrar1;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblIcon;
     private javax.swing.JLabel lblLupa;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel pnlButton;
     private javax.swing.JPanel pnlPesquisa;
     private javax.swing.JScrollPane scrlPane;
     private javax.swing.JTable tblConteudo;
