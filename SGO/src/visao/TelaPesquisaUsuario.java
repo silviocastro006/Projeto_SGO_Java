@@ -43,7 +43,7 @@ public class TelaPesquisaUsuario extends TelaPesquisaPadrao{
         btnCadastrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // Abrir nova tela
+                /*/ Abrir nova tela
                 // Criar uma nova instância do JFrame para a tela de cadastro
                 TelaEntreGlass telaentreglass = new TelaEntreGlass();
                 telaentreglass.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -51,10 +51,17 @@ public class TelaPesquisaUsuario extends TelaPesquisaPadrao{
                 
                 // Torna a janela visível acima da janela principal
                 telaentreglass.setAlwaysOnTop(true);  // Garante que a tela de cadastro fique em cima
-                telaentreglass.setVisible(true);  // Exibe a tela
-                
-                
+                telaentreglass.setVisible(true);  // Exibe a tela*/
+
                 // Exibir o popup com a janela de cadastro
+                
+                
+                // Verifica se o Drawer está visível e esconde o Drawer antes de mostrar o GlassPanePopup
+                if (TelaPrincipal.drawer.isShow()) {
+                    TelaPrincipal.drawer.hide();
+                }
+
+                // Exibe o GlassPanePopup
                 GlassPanePopup.showPopup(new JanelaCadastroCliente());
             }
         });

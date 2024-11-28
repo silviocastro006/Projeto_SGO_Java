@@ -15,6 +15,8 @@ import javaswingdev.drawer.DrawerItem;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import raven.glasspanepopup.GlassPanePopup;
+import raven.glasspanepopup.Option;
 
 /**
  *
@@ -23,7 +25,7 @@ import javax.swing.UIManager;
 public class TelaPrincipal extends javax.swing.JFrame {
 
     // Criação da variável para o Drawer animado
-    public DrawerController drawer;
+    public static DrawerController drawer;
     
     // Criação das telas que serão inseridas no cardlayout
     TelaPesquisaUsuario telapesuse = new TelaPesquisaUsuario();
@@ -108,6 +110,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         CardPanel.setPreferredSize(new java.awt.Dimension(1366, 768)); // Ajuste ao tamanho desejado
         CardPanel.setSize(getWidth(), getHeight()); // Tamanho baseado no JFrame
+        
+        // Instalar o GlassPane
+        GlassPanePopup.install(this); 
         
   
     }
