@@ -13,12 +13,12 @@ import java.awt.LinearGradientPaint;
  *
  * @author acer
  */
-public class Header extends javax.swing.JPanel {
+public class Header_Drawer extends javax.swing.JPanel {
 
     /**
      * Creates new form Header
      */
-    public Header() {
+    public Header_Drawer() {
         initComponents();
     }
     

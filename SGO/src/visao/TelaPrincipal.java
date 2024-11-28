@@ -20,11 +20,19 @@ import javax.swing.UIManager;
  *
  * @author acer
  */
-public class TesteMain extends javax.swing.JFrame {
+public class TelaPrincipal extends javax.swing.JFrame {
 
+    // Criação da variável para o Drawer animado
     public DrawerController drawer;
-    TestePanelPadrao teste = new TestePanelPadrao();
-    private DrawerItem itemSelecionado = null;  // Variável para controlar o item selecionado
+    
+    // Criação das telas que serão inseridas no cardlayout
+    TelaPesquisaUsuario telapesuse = new TelaPesquisaUsuario();
+    TelaPesquisaCliente telapescli = new TelaPesquisaCliente();
+    TelaPesquisaVisita telapesvis = new TelaPesquisaVisita();
+    TelaPesquisaOrcamento telapesorc = new TelaPesquisaOrcamento();
+    
+    // Criação da variável para saber qual item selecionado no drawer
+    private DrawerItem itemSelecionado = null;
     
     
     // Criação dos itens para o painel
@@ -35,7 +43,7 @@ public class TesteMain extends javax.swing.JFrame {
     DrawerItem orcamento_item = new DrawerItem("Orçamentos");
     
     
-    public TesteMain() {
+    public TelaPrincipal() {
         
         // Configurações do menu principal
         setUndecorated(true); // Remover a barra de título
@@ -52,13 +60,13 @@ public class TesteMain extends javax.swing.JFrame {
         visita_item.icon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/visitas_azul.png"))).build();
         orcamento_item.icon(new ImageIcon(getClass().getResource("/icones/icones_pequenos/orcamentos_azul.png"))).build();
         
+        
         // Alterando as cores do texto do drawer
         dashboard_item.setForeground(new Color(8, 0, 50));
         usuario_item.setForeground(new Color(8, 0, 50));
         cliente_item.setForeground(new Color(8, 0, 50));
         visita_item.setForeground(new Color(8, 0, 50));
         orcamento_item.setForeground(new Color(8, 0, 50));
-        
         
         
         // Adicionando o MouseListener para cada item
@@ -70,7 +78,6 @@ public class TesteMain extends javax.swing.JFrame {
         
         
         // Editando a fonte para cada item
-        
         Font fonte_label = new Font("OpenSans-Regular", Font.PLAIN, 20);
         dashboard_item.setFont(fonte_label);
         usuario_item.setFont(fonte_label);
@@ -81,7 +88,7 @@ public class TesteMain extends javax.swing.JFrame {
         
         // Criando o drawer + animação        
         drawer = Drawer.newDrawer(this)
-                .header(new Header())
+                .header(new Header_Drawer())
                 .separator(20, new Color(255,255,255))
                 .addChild(dashboard_item)
                 .addChild(usuario_item)
@@ -94,11 +101,13 @@ public class TesteMain extends javax.swing.JFrame {
 
         
         // Adicionando a tela usuários no CardPanel
-        CardPanel.add(teste,"usuarios");
+        CardPanel.add(telapesuse,"usuarios");
+        CardPanel.add(telapescli,"clientes");
+        CardPanel.add(telapesvis,"visitas");
+        CardPanel.add(telapesorc,"orcamentos");
+        
         CardPanel.setPreferredSize(new java.awt.Dimension(1366, 768)); // Ajuste ao tamanho desejado
         CardPanel.setSize(getWidth(), getHeight()); // Tamanho baseado no JFrame
-        
-        // Configurações dos botões da tela
         
         
     }
@@ -121,8 +130,18 @@ public class TesteMain extends javax.swing.JFrame {
 
             // Exibe o painel correspondente
             CardLayout layout = (CardLayout) CardPanel.getLayout();
+            
+           
+            
+            
             if (item == usuario_item) {
                 layout.show(CardPanel, "usuarios");
+            } else if (item == cliente_item){
+                layout.show(CardPanel, "clientes");
+            } else if (item == visita_item){
+                layout.show(CardPanel,"visitas");
+            } else if (item == orcamento_item){
+                layout.show(CardPanel,"orcamentos");
             }
 
             item.invalidate();
@@ -200,7 +219,6 @@ public class TesteMain extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(getBackground());
         setFocusCycleRoot(false);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
         setResizable(false);
 
         MenuSup.setBackground(Color.decode("#4b526f"));
@@ -304,20 +322,20 @@ public class TesteMain extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TesteMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TesteMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TesteMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TesteMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new TesteMain().setVisible(true);
+                new TelaPrincipal().setVisible(true);
             }
         });
     }

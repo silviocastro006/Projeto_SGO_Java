@@ -11,13 +11,14 @@ import java.awt.Graphics2D;
 import java.awt.LinearGradientPaint;
 import javax.swing.table.DefaultTableCellRenderer;
 
-public class TestePanelPadrao extends javax.swing.JPanel {
+public class TelaPesquisaPadrao extends javax.swing.JPanel {
 
-    /**
-     * Creates new form TestePanelPadrao
-     * 
-     */
-    public TestePanelPadrao(){
+    
+    
+    
+    
+    
+    public TelaPesquisaPadrao(){
         
         // Configurações iniciais da tela
         initComponents();
@@ -75,7 +76,6 @@ public class TestePanelPadrao extends javax.swing.JPanel {
         lblTitulo = new javax.swing.JLabel();
         pnlPesquisa = new javax.swing.JPanel();
         txtpesquisa = new javax.swing.JTextField();
-        lblLupa = new javax.swing.JLabel();
         scrlPane = new util.elementos.ScrollPaneWin11();
         tblConteudo = new javax.swing.JTable();
         pnlBotoes = new javax.swing.JPanel();
@@ -93,7 +93,7 @@ public class TestePanelPadrao extends javax.swing.JPanel {
 
         lblTitulo.setFont(new java.awt.Font("Open Sans", 0, 48)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(48, 58, 95));
-        lblTitulo.setText("PESQUISA USUARIOS");
+        lblTitulo.setText("TITULO PESQUISA");
 
         pnlPesquisa.setBackground(new java.awt.Color(255, 255, 255));
         pnlPesquisa.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 102), 1, true));
@@ -131,71 +131,10 @@ public class TestePanelPadrao extends javax.swing.JPanel {
         scrlPane.setBackground(new java.awt.Color(255, 255, 255));
 
         tblConteudo.setAutoCreateRowSorter(true);
-        tblConteudo.setBackground(new java.awt.Color(249, 249, 249));
         tblConteudo.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         tblConteudo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Codigo", "Nome", "CPF", "Endereço", "Telefone", "Data Nascimento", "Email", "Cargo"
@@ -215,18 +154,9 @@ public class TestePanelPadrao extends javax.swing.JPanel {
         tblConteudo.setRowHeight(30);
         tblConteudo.setSelectionBackground(new java.awt.Color(207, 211, 225));
         tblConteudo.setShowGrid(true);
+        tblConteudo.setSurrendersFocusOnKeystroke(true);
         tblConteudo.getTableHeader().setReorderingAllowed(false);
         scrlPane.setViewportView(tblConteudo);
-        if (tblConteudo.getColumnModel().getColumnCount() > 0) {
-            tblConteudo.getColumnModel().getColumn(0).setHeaderValue("Codigo");
-            tblConteudo.getColumnModel().getColumn(1).setHeaderValue("Nome");
-            tblConteudo.getColumnModel().getColumn(2).setHeaderValue("CPF");
-            tblConteudo.getColumnModel().getColumn(3).setHeaderValue("Endereço");
-            tblConteudo.getColumnModel().getColumn(4).setHeaderValue("Telefone");
-            tblConteudo.getColumnModel().getColumn(5).setHeaderValue("Data Nascimento");
-            tblConteudo.getColumnModel().getColumn(6).setHeaderValue("Email");
-            tblConteudo.getColumnModel().getColumn(7).setHeaderValue("Cargo");
-        }
 
         pnlBotoes.setOpaque(false);
 
@@ -316,16 +246,16 @@ public class TestePanelPadrao extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private util.sample.message.Button btnCadastrar;
-    private util.sample.message.Button btnEditar;
-    private util.sample.message.Button btnExcluir;
-    private javax.swing.JLabel lblIcon;
-    private javax.swing.JLabel lblLupa;
-    private javax.swing.JLabel lblTitulo;
-    private javax.swing.JPanel pnlBotoes;
-    private javax.swing.JPanel pnlPesquisa;
-    private javax.swing.JScrollPane scrlPane;
-    private javax.swing.JTable tblConteudo;
-    private javax.swing.JTextField txtpesquisa;
+    protected util.sample.message.Button btnCadastrar;
+    protected util.sample.message.Button btnEditar;
+    protected util.sample.message.Button btnExcluir;
+    protected javax.swing.JLabel lblIcon;
+    protected final javax.swing.JLabel lblLupa = new javax.swing.JLabel();
+    protected javax.swing.JLabel lblTitulo;
+    protected javax.swing.JPanel pnlBotoes;
+    protected javax.swing.JPanel pnlPesquisa;
+    protected javax.swing.JScrollPane scrlPane;
+    protected javax.swing.JTable tblConteudo;
+    protected javax.swing.JTextField txtpesquisa;
     // End of variables declaration//GEN-END:variables
 }
