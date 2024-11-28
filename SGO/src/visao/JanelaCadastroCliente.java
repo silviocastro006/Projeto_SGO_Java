@@ -8,12 +8,12 @@ package visao;
  *
  * @author acer
  */
-public class TelaCadastroCliente extends javax.swing.JPanel {
+public class JanelaCadastroCliente extends javax.swing.JPanel {
 
     /**
      * Creates new form TelaCadastroCliente
      */
-    public TelaCadastroCliente() {
+    public JanelaCadastroCliente() {
         initComponents();
     }
 
@@ -25,6 +25,8 @@ public class TelaCadastroCliente extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setBackground(new java.awt.Color(255, 102, 102));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

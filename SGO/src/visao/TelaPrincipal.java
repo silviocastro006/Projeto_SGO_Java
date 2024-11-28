@@ -109,7 +109,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         CardPanel.setPreferredSize(new java.awt.Dimension(1366, 768)); // Ajuste ao tamanho desejado
         CardPanel.setSize(getWidth(), getHeight()); // Tamanho baseado no JFrame
         
-        
+  
     }
     
 
@@ -133,7 +133,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             
            
             
-            
+            // Troca de painel no cardlayout
             if (item == usuario_item) {
                 layout.show(CardPanel, "usuarios");
             } else if (item == cliente_item){
@@ -192,6 +192,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Restaura o estilo do item, se necessário
     private void restoreItemStyle(DrawerItem item) {
+        
         item.setBackground(Color.WHITE);  // Altera o fundo de volta para branco
         item.setForeground(Color.black);
 
