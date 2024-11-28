@@ -205,7 +205,7 @@ public class TesteMain extends javax.swing.JFrame {
         btnMenu.setBorder(null);
         btnMenu.setBorderPainted(false);
         btnMenu.setContentAreaFilled(false);
-        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnMenu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnMenu.setIconTextGap(10);
         btnMenu.setMargin(new java.awt.Insets(14, 14, 14, 14));
@@ -221,7 +221,7 @@ public class TesteMain extends javax.swing.JFrame {
         btnFechar.setBorder(null);
         btnFechar.setBorderPainted(false);
         btnFechar.setContentAreaFilled(false);
-        btnFechar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnFechar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFecharActionPerformed(evt);
