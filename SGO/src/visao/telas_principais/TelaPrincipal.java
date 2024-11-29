@@ -16,9 +16,6 @@ import javaswingdev.drawer.DrawerItem;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
-import raven.glasspanepopup.GlassPanePopup;
-import raven.glasspanepopup.Option;
-
 /**
  *
  * @author acer

@@ -7,7 +7,6 @@ package visao.telas_principais;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Window;
-import raven.glasspanepopup.GlassPanePopup;
 import javax.swing.*;
 import java.awt.event.*;
 
