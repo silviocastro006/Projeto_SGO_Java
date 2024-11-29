@@ -35,7 +35,7 @@ public class TelaPesquisaPadrao extends javax.swing.JPanel {
         // Centralizando texto na tabela
         DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) tblConteudo.getTableHeader().getDefaultRenderer();
         renderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-
+        
     }
     
     @Override
