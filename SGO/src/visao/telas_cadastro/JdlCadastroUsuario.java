@@ -4,6 +4,9 @@
  */
 package visao.telas_cadastro;
 
+import java.awt.Color;
+import util.elementos.PainelRedondo;
+
 /**
  *
  * @author acer
@@ -19,6 +22,7 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,37 +33,230 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jpnFundo = new javax.swing.JPanel();
+        pnlNome = new PainelRedondo();
+        lblNome = new javax.swing.JLabel();
+        pnlCPF = new PainelRedondo();
+        lblCPF = new javax.swing.JLabel();
+        pnlEndereco = new PainelRedondo();
+        lblEndereco = new javax.swing.JLabel();
+        pnlTelefone = new PainelRedondo();
+        lblTelefone = new javax.swing.JLabel();
+        txtNome1 = new javax.swing.JTextField();
+        txtCPF = new javax.swing.JTextField();
+        txtEndereco = new javax.swing.JTextField();
+        txtTelefone = new javax.swing.JTextField();
+        pnlEmail = new PainelRedondo();
+        lblEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        pnlSenha = new PainelRedondo();
+        lblSenha = new javax.swing.JLabel();
+        txtSenha = new javax.swing.JPasswordField();
+        pnlRSenha = new PainelRedondo();
+        lblRSenha = new javax.swing.JLabel();
+        txtRSenha = new javax.swing.JPasswordField();
+        pnlCargo = new PainelRedondo();
+        txtCargo = new javax.swing.JLabel();
+        cmbCargo = new javax.swing.JComboBox<>();
+        btnSalvar = new util.elementos.BotaoPrincipal();
+        btnCancelar = new util.elementos.BotaoPrincipal();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Usuário");
+        setAlwaysOnTop(true);
         setModal(true);
+        setResizable(false);
+        setType(java.awt.Window.Type.POPUP);
 
-        jPanel1.setBackground(new java.awt.Color(153, 255, 102));
+        jpnFundo.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
+        pnlNome.setBackground(new java.awt.Color(204, 204, 204));
+        pnlNome.setLayout(new java.awt.BorderLayout());
+
+        lblNome.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNome.setText("Nome");
+        pnlNome.add(lblNome, java.awt.BorderLayout.CENTER);
+
+        pnlCPF.setBackground(new java.awt.Color(204, 204, 204));
+        pnlCPF.setLayout(new java.awt.BorderLayout());
+
+        lblCPF.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblCPF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCPF.setText("CPF");
+        pnlCPF.add(lblCPF, java.awt.BorderLayout.CENTER);
+
+        pnlEndereco.setBackground(new java.awt.Color(204, 204, 204));
+        pnlEndereco.setLayout(new java.awt.BorderLayout());
+
+        lblEndereco.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblEndereco.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEndereco.setText("Endereço");
+        pnlEndereco.add(lblEndereco, java.awt.BorderLayout.CENTER);
+
+        pnlTelefone.setBackground(new java.awt.Color(204, 204, 204));
+        pnlTelefone.setLayout(new java.awt.BorderLayout());
+
+        lblTelefone.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblTelefone.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTelefone.setText("Telefone");
+        pnlTelefone.add(lblTelefone, java.awt.BorderLayout.CENTER);
+
+        pnlEmail.setBackground(new java.awt.Color(204, 204, 204));
+        pnlEmail.setLayout(new java.awt.BorderLayout());
+
+        lblEmail.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblEmail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEmail.setText("Email");
+        pnlEmail.add(lblEmail, java.awt.BorderLayout.CENTER);
+
+        pnlSenha.setBackground(new java.awt.Color(204, 204, 204));
+        pnlSenha.setLayout(new java.awt.BorderLayout());
+
+        lblSenha.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblSenha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSenha.setText("Senha");
+        pnlSenha.add(lblSenha, java.awt.BorderLayout.CENTER);
+
+        pnlRSenha.setBackground(new java.awt.Color(204, 204, 204));
+        pnlRSenha.setLayout(new java.awt.BorderLayout());
+
+        lblRSenha.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblRSenha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRSenha.setText("Repita Senha");
+        pnlRSenha.add(lblRSenha, java.awt.BorderLayout.CENTER);
+
+        txtRSenha.setToolTipText("");
+
+        pnlCargo.setBackground(new java.awt.Color(204, 204, 204));
+        pnlCargo.setLayout(new java.awt.BorderLayout());
+
+        txtCargo.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        txtCargo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtCargo.setText("Cargo");
+        pnlCargo.add(txtCargo, java.awt.BorderLayout.CENTER);
+
+        cmbCargo.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+        cmbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Funcionario" }));
+
+        btnSalvar.setBackground(new java.awt.Color(58, 109, 43));
+        btnSalvar.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalvar.setText("Salvar");
+        btnSalvar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+
+        btnCancelar.setBackground(new java.awt.Color(120, 32, 32));
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpnFundoLayout = new javax.swing.GroupLayout(jpnFundo);
+        jpnFundo.setLayout(jpnFundoLayout);
+        jpnFundoLayout.setHorizontalGroup(
+            jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnFundoLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpnFundoLayout.createSequentialGroup()
+                        .addComponent(pnlTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pnlCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jpnFundoLayout.createSequentialGroup()
+                        .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpnFundoLayout.createSequentialGroup()
+                                .addComponent(pnlSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(pnlRSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtRSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpnFundoLayout.createSequentialGroup()
+                                .addComponent(pnlEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpnFundoLayout.createSequentialGroup()
+                                .addComponent(pnlNome, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpnFundoLayout.createSequentialGroup()
+                                .addComponent(pnlCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpnFundoLayout.createSequentialGroup()
+                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpnFundoLayout.createSequentialGroup()
+                                .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 48, Short.MAX_VALUE)))
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 423, Short.MAX_VALUE)
+        jpnFundoLayout.setVerticalGroup(
+            jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnFundoLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTelefone)
+                    .addComponent(pnlCargo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtRSenha, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlRSenha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpnFundo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpnFundo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,6 +302,32 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private util.elementos.BotaoPrincipal btnCancelar;
+    private util.elementos.BotaoPrincipal btnSalvar;
+    private javax.swing.JComboBox<String> cmbCargo;
+    private javax.swing.JPanel jpnFundo;
+    private javax.swing.JLabel lblCPF;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblEndereco;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblRSenha;
+    private javax.swing.JLabel lblSenha;
+    private javax.swing.JLabel lblTelefone;
+    public javax.swing.JPanel pnlCPF;
+    public javax.swing.JPanel pnlCargo;
+    public javax.swing.JPanel pnlEmail;
+    public javax.swing.JPanel pnlEndereco;
+    public javax.swing.JPanel pnlNome;
+    public javax.swing.JPanel pnlRSenha;
+    public javax.swing.JPanel pnlSenha;
+    public javax.swing.JPanel pnlTelefone;
+    private javax.swing.JTextField txtCPF;
+    private javax.swing.JLabel txtCargo;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtEndereco;
+    private javax.swing.JTextField txtNome1;
+    private javax.swing.JPasswordField txtRSenha;
+    private javax.swing.JPasswordField txtSenha;
+    private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }
