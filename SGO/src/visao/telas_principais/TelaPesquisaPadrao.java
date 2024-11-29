@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package visao;
+package visao.telas_principais;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -79,9 +79,9 @@ public class TelaPesquisaPadrao extends javax.swing.JPanel {
         scrlPane = new util.elementos.ScrollPaneWin11();
         tblConteudo = new javax.swing.JTable();
         pnlBotoes = new javax.swing.JPanel();
-        btnCadastrar = new util.sample.message.Button();
-        btnEditar = new util.sample.message.Button();
-        btnExcluir = new util.sample.message.Button();
+        btnCadastrar = new util.elementos.BotaoPrincipal();
+        btnEditar = new util.elementos.BotaoPrincipal();
+        btnExcluir = new util.elementos.BotaoPrincipal();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setOpaque(false);
@@ -246,9 +246,9 @@ public class TelaPesquisaPadrao extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected util.sample.message.Button btnCadastrar;
-    protected util.sample.message.Button btnEditar;
-    protected util.sample.message.Button btnExcluir;
+    protected util.elementos.BotaoPrincipal btnCadastrar;
+    protected util.elementos.BotaoPrincipal btnEditar;
+    protected util.elementos.BotaoPrincipal btnExcluir;
     protected javax.swing.JLabel lblIcon;
     protected final javax.swing.JLabel lblLupa = new javax.swing.JLabel();
     protected javax.swing.JLabel lblTitulo;

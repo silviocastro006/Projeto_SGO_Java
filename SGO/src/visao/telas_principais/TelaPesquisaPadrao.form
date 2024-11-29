@@ -292,7 +292,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="util.sample.message.Button" name="btnCadastrar">
+        <Component class="util.elementos.BotaoPrincipal" name="btnCadastrar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="2b" green="6d" red="3a" type="rgb"/>
@@ -315,7 +315,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
           </AuxValues>
         </Component>
-        <Component class="util.sample.message.Button" name="btnEditar">
+        <Component class="util.elementos.BotaoPrincipal" name="btnEditar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="70" green="67" red="28" type="rgb"/>
@@ -335,7 +335,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
           </AuxValues>
         </Component>
-        <Component class="util.sample.message.Button" name="btnExcluir">
+        <Component class="util.elementos.BotaoPrincipal" name="btnExcluir">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="20" green="20" red="78" type="rgb"/>

@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao;
+package visao.telas_principais;
 
+import visao.telas_cadastro.JdlCadastroUsuario;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
