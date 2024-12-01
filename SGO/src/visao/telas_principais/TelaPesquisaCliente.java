@@ -21,7 +21,7 @@ public class TelaPesquisaCliente extends TelaPesquisaPadrao{
             }));
         
         // Edição do título da tela
-        lblTitulo.setText("Pesquisa Cliente");
+        lblTitulo.setText("Pesquisa Clientes");
         
         // Edição do icone da tela
         lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_padrao/clientes_azul_80.png")));

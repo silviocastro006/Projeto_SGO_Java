@@ -22,7 +22,7 @@ public class TelaPesquisaOrcamento extends TelaPesquisaPadrao{
             }));
         
         // Edição do título da tela
-        lblTitulo.setText("Pesquisa Orçamento");
+        lblTitulo.setText("Pesquisa Orçamentos");
         
         // Edição do icone da tela
         lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_padrao/orcamentos_azul_80.png")));

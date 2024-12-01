@@ -56,7 +56,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="btnMenu" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace pref="1281" max="32767" attributes="0"/>
+                  <EmptySpace pref="1241" max="32767" attributes="0"/>
+                  <Component id="btnMinimizar" min="-2" pref="34" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnFechar" min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -65,6 +67,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="btnFechar" alignment="0" pref="0" max="32767" attributes="0"/>
               <Component id="btnMenu" alignment="0" pref="35" max="32767" attributes="0"/>
+              <Component id="btnMinimizar" alignment="1" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -116,6 +119,28 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFecharActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnMinimizar">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="Color.decode(&quot;#495273&quot;)" type="code"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icones/icones_pequenos/minimizar_40.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Fechar Sistema"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+            <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMinimizarActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

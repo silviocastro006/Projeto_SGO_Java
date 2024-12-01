@@ -5,13 +5,20 @@
 package visao.telas_cadastro;
 
 import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.LinearGradientPaint;
+import javax.swing.JOptionPane;
 import util.elementos.PainelRedondo;
+import util.elementos.PainelGradienteCadastro;
 
 /**
  *
  * @author acer
  */
 public class JdlCadastroUsuario extends javax.swing.JDialog {
+    
 
     /**
      * Creates new form JdlCadastroCliente
@@ -19,8 +26,7 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
     public JdlCadastroUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(null);
-        
+        setLocation(20, 170);
     }
     
 
@@ -33,7 +39,7 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jpnFundo = new javax.swing.JPanel();
+        jpnFundo = new util.elementos.PainelGradienteCadastro();
         pnlNome = new PainelRedondo();
         lblNome = new javax.swing.JLabel();
         pnlCPF = new PainelRedondo();
@@ -43,9 +49,7 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
         pnlTelefone = new PainelRedondo();
         lblTelefone = new javax.swing.JLabel();
         txtNome1 = new javax.swing.JTextField();
-        txtCPF = new javax.swing.JTextField();
         txtEndereco = new javax.swing.JTextField();
-        txtTelefone = new javax.swing.JTextField();
         pnlEmail = new PainelRedondo();
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
@@ -60,6 +64,8 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
         cmbCargo = new javax.swing.JComboBox<>();
         btnSalvar = new util.elementos.BotaoPrincipal();
         btnCancelar = new util.elementos.BotaoPrincipal();
+        txtCPF = new javax.swing.JFormattedTextField();
+        txtTelefone = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Usuário");
@@ -70,68 +76,85 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
 
         jpnFundo.setBackground(new java.awt.Color(255, 255, 255));
 
-        pnlNome.setBackground(new java.awt.Color(204, 204, 204));
+        pnlNome.setBackground(new java.awt.Color(48, 58, 95));
         pnlNome.setLayout(new java.awt.BorderLayout());
 
         lblNome.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblNome.setForeground(new java.awt.Color(255, 255, 255));
         lblNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNome.setText("Nome");
         pnlNome.add(lblNome, java.awt.BorderLayout.CENTER);
 
-        pnlCPF.setBackground(new java.awt.Color(204, 204, 204));
+        pnlCPF.setBackground(new java.awt.Color(48, 58, 95));
         pnlCPF.setLayout(new java.awt.BorderLayout());
 
         lblCPF.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblCPF.setForeground(new java.awt.Color(255, 255, 255));
         lblCPF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCPF.setText("CPF");
         pnlCPF.add(lblCPF, java.awt.BorderLayout.CENTER);
 
-        pnlEndereco.setBackground(new java.awt.Color(204, 204, 204));
+        pnlEndereco.setBackground(new java.awt.Color(48, 58, 95));
         pnlEndereco.setLayout(new java.awt.BorderLayout());
 
         lblEndereco.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblEndereco.setForeground(new java.awt.Color(255, 255, 255));
         lblEndereco.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEndereco.setText("Endereço");
         pnlEndereco.add(lblEndereco, java.awt.BorderLayout.CENTER);
 
-        pnlTelefone.setBackground(new java.awt.Color(204, 204, 204));
+        pnlTelefone.setBackground(new java.awt.Color(48, 58, 95));
         pnlTelefone.setLayout(new java.awt.BorderLayout());
 
         lblTelefone.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblTelefone.setForeground(new java.awt.Color(255, 255, 255));
         lblTelefone.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTelefone.setText("Telefone");
         pnlTelefone.add(lblTelefone, java.awt.BorderLayout.CENTER);
 
-        pnlEmail.setBackground(new java.awt.Color(204, 204, 204));
+        txtNome1.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+
+        txtEndereco.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+
+        pnlEmail.setBackground(new java.awt.Color(48, 58, 95));
         pnlEmail.setLayout(new java.awt.BorderLayout());
 
         lblEmail.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblEmail.setForeground(new java.awt.Color(255, 255, 255));
         lblEmail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEmail.setText("Email");
         pnlEmail.add(lblEmail, java.awt.BorderLayout.CENTER);
 
-        pnlSenha.setBackground(new java.awt.Color(204, 204, 204));
+        txtEmail.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+
+        pnlSenha.setBackground(new java.awt.Color(48, 58, 95));
         pnlSenha.setLayout(new java.awt.BorderLayout());
 
         lblSenha.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblSenha.setForeground(new java.awt.Color(255, 255, 255));
         lblSenha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSenha.setText("Senha");
         pnlSenha.add(lblSenha, java.awt.BorderLayout.CENTER);
 
-        pnlRSenha.setBackground(new java.awt.Color(204, 204, 204));
+        txtSenha.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+
+        pnlRSenha.setBackground(new java.awt.Color(48, 58, 95));
         pnlRSenha.setLayout(new java.awt.BorderLayout());
 
         lblRSenha.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblRSenha.setForeground(new java.awt.Color(255, 255, 255));
         lblRSenha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRSenha.setText("Repita Senha");
         pnlRSenha.add(lblRSenha, java.awt.BorderLayout.CENTER);
 
+        txtRSenha.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         txtRSenha.setToolTipText("");
 
-        pnlCargo.setBackground(new java.awt.Color(204, 204, 204));
+        pnlCargo.setBackground(new java.awt.Color(48, 58, 95));
         pnlCargo.setLayout(new java.awt.BorderLayout());
 
         txtCargo.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        txtCargo.setForeground(new java.awt.Color(255, 255, 255));
         txtCargo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtCargo.setText("Cargo");
         pnlCargo.add(txtCargo, java.awt.BorderLayout.CENTER);
@@ -141,11 +164,13 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
 
         btnSalvar.setBackground(new java.awt.Color(58, 109, 43));
         btnSalvar.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/salvar_32.png"))); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
 
         btnCancelar.setBackground(new java.awt.Color(120, 32, 32));
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/cancelar_32.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -153,6 +178,21 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
                 btnCancelarActionPerformed(evt);
             }
         });
+
+        try {
+            txtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtCPF.setToolTipText("");
+        txtCPF.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+
+        try {
+            txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("( ## ) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtTelefone.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jpnFundoLayout = new javax.swing.GroupLayout(jpnFundo);
         jpnFundo.setLayout(jpnFundoLayout);
@@ -188,17 +228,18 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jpnFundoLayout.createSequentialGroup()
-                                .addComponent(pnlCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpnFundoLayout.createSequentialGroup()
-                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpnFundoLayout.createSequentialGroup()
-                                .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnFundoLayout.createSequentialGroup()
+                                    .addComponent(pnlCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtCPF))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnFundoLayout.createSequentialGroup()
+                                    .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 48, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -210,9 +251,9 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
                     .addComponent(pnlNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(txtCPF))
                 .addGap(29, 29, 29)
                 .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,9 +261,9 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
                 .addGap(29, 29, 29)
                 .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtTelefone)
                     .addComponent(pnlCargo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbCargo, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(txtTelefone))
                 .addGap(29, 29, 29)
                 .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,8 +276,8 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
                     .addComponent(pnlSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
 
@@ -321,13 +362,13 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
     public javax.swing.JPanel pnlRSenha;
     public javax.swing.JPanel pnlSenha;
     public javax.swing.JPanel pnlTelefone;
-    private javax.swing.JTextField txtCPF;
+    private javax.swing.JFormattedTextField txtCPF;
     private javax.swing.JLabel txtCargo;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNome1;
     private javax.swing.JPasswordField txtRSenha;
     private javax.swing.JPasswordField txtSenha;
-    private javax.swing.JTextField txtTelefone;
+    private javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }

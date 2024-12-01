@@ -30,7 +30,7 @@ public class TelaPesquisaUsuario extends TelaPesquisaPadrao{
             }));
         
         // Edição do título da tela
-        lblTitulo.setText("Pesquisa Usuário");
+        lblTitulo.setText("Pesquisa Usuarios");
         
         // Edição do icone da tela
         lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_padrao/usuarios_azul_80.png")));
@@ -45,9 +45,10 @@ public class TelaPesquisaUsuario extends TelaPesquisaPadrao{
             
             @Override
             public void mouseClicked(MouseEvent e){
-               TelaPrincipal prin = new TelaPrincipal();
-               prin.cadastro_usuario.setVisible(true);
-               prin.criaDrawer();
+                
+               // Usando a instância da TelaPrincipal que já existe
+                TelaPrincipal principal = (TelaPrincipal) SwingUtilities.getWindowAncestor(TelaPesquisaUsuario.this);
+                principal.cadastro_usuario.setVisible(true);
             }
             
         });

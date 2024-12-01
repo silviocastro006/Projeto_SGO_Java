@@ -4,17 +4,21 @@
  */
 package visao.telas_principais;
 
+import java.awt.BorderLayout;
 import visao.telas_cadastro.JdlCadastroUsuario;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javaswingdev.drawer.Drawer;
 import javaswingdev.drawer.DrawerController;
 import javaswingdev.drawer.DrawerItem;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 /**
  *
@@ -214,7 +218,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         CardPanel.setPreferredSize(new java.awt.Dimension(1366, 768)); // Ajuste ao tamanho desejado
         CardPanel.setSize(getWidth(), getHeight()); // Tamanho baseado no JFrame
+        // Chama o método para adicionar o fundo fosco
     }
+    
+   
 
 
     /**
@@ -229,6 +236,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuSup = new javax.swing.JPanel();
         btnMenu = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
+        btnMinimizar = new javax.swing.JButton();
         CardPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -267,19 +275,35 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnMinimizar.setBackground(Color.decode("#495273"));
+        btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/minimizar_40.png"))); // NOI18N
+        btnMinimizar.setToolTipText("Fechar Sistema");
+        btnMinimizar.setBorder(null);
+        btnMinimizar.setBorderPainted(false);
+        btnMinimizar.setContentAreaFilled(false);
+        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMinimizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMinimizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout MenuSupLayout = new javax.swing.GroupLayout(MenuSup);
         MenuSup.setLayout(MenuSupLayout);
         MenuSupLayout.setHorizontalGroup(
             MenuSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuSupLayout.createSequentialGroup()
                 .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1281, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1241, Short.MAX_VALUE)
+                .addComponent(btnMinimizar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         MenuSupLayout.setVerticalGroup(
             MenuSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+            .addComponent(btnMinimizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         CardPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -318,6 +342,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void btnMinimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizarActionPerformed
+        this.setState(ICONIFIED);
+    }//GEN-LAST:event_btnMinimizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -360,5 +388,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel MenuSup;
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnMinimizar;
     // End of variables declaration//GEN-END:variables
 }
