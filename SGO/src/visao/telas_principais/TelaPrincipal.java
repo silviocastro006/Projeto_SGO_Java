@@ -277,7 +277,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         btnMinimizar.setBackground(Color.decode("#495273"));
         btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/minimizar_40.png"))); // NOI18N
-        btnMinimizar.setToolTipText("Fechar Sistema");
+        btnMinimizar.setToolTipText("Minimizar");
         btnMinimizar.setBorder(null);
         btnMinimizar.setBorderPainted(false);
         btnMinimizar.setContentAreaFilled(false);

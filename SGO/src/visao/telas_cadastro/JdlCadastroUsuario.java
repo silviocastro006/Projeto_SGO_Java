@@ -29,7 +29,15 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
         setLocation(20, 170);
     }
     
-
+    public void limparCampos(){
+      txtCPF.setText("");
+      txtEmail.setText("");
+      txtEndereco.setText("");
+      txtNome.setText("");
+      txtSenha.setText("");
+      txtTelefone.setText("");
+      txtRSenha.setText("");
+    } 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,7 +56,7 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
         lblEndereco = new javax.swing.JLabel();
         pnlTelefone = new PainelRedondo();
         lblTelefone = new javax.swing.JLabel();
-        txtNome1 = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         txtEndereco = new javax.swing.JTextField();
         pnlEmail = new PainelRedondo();
         lblEmail = new javax.swing.JLabel();
@@ -60,7 +68,7 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
         lblRSenha = new javax.swing.JLabel();
         txtRSenha = new javax.swing.JPasswordField();
         pnlCargo = new PainelRedondo();
-        txtCargo = new javax.swing.JLabel();
+        lblCargo = new javax.swing.JLabel();
         cmbCargo = new javax.swing.JComboBox<>();
         btnSalvar = new util.elementos.BotaoPrincipal();
         btnCancelar = new util.elementos.BotaoPrincipal();
@@ -112,7 +120,7 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
         lblTelefone.setText("Telefone");
         pnlTelefone.add(lblTelefone, java.awt.BorderLayout.CENTER);
 
-        txtNome1.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+        txtNome.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
 
         txtEndereco.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
 
@@ -153,11 +161,11 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
         pnlCargo.setBackground(new java.awt.Color(48, 58, 95));
         pnlCargo.setLayout(new java.awt.BorderLayout());
 
-        txtCargo.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
-        txtCargo.setForeground(new java.awt.Color(255, 255, 255));
-        txtCargo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtCargo.setText("Cargo");
-        pnlCargo.add(txtCargo, java.awt.BorderLayout.CENTER);
+        lblCargo.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblCargo.setForeground(new java.awt.Color(255, 255, 255));
+        lblCargo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCargo.setText("Cargo");
+        pnlCargo.add(lblCargo, java.awt.BorderLayout.CENTER);
 
         cmbCargo.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         cmbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Funcionario" }));
@@ -167,6 +175,11 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/salvar_32.png"))); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setBackground(new java.awt.Color(120, 32, 32));
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
@@ -226,7 +239,7 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
                             .addGroup(jpnFundoLayout.createSequentialGroup()
                                 .addComponent(pnlNome, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jpnFundoLayout.createSequentialGroup()
                                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34)
@@ -249,7 +262,7 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
                 .addGap(47, 47, 47)
                 .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
@@ -298,6 +311,10 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        limparCampos();
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -348,6 +365,7 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cmbCargo;
     private javax.swing.JPanel jpnFundo;
     private javax.swing.JLabel lblCPF;
+    private javax.swing.JLabel lblCargo;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblEndereco;
     private javax.swing.JLabel lblNome;
@@ -363,10 +381,9 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
     public javax.swing.JPanel pnlSenha;
     public javax.swing.JPanel pnlTelefone;
     private javax.swing.JFormattedTextField txtCPF;
-    private javax.swing.JLabel txtCargo;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;
-    private javax.swing.JTextField txtNome1;
+    private javax.swing.JTextField txtNome;
     private javax.swing.JPasswordField txtRSenha;
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JFormattedTextField txtTelefone;

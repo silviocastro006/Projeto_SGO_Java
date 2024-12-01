@@ -10,4 +10,10 @@ package modelo;
  */
 public class ModeloUsuarios {
     
+    // Atributos usuários
+    
+    public static int id_usuario;
+    public static String nome_usuario;
+    
+    
 }
