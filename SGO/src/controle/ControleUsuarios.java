@@ -12,7 +12,11 @@ import modelo.ModeloUsuarios;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import visao.telas_cadastro.JdlCadastroUsuario;
+import visao.telas_cadastro.JdlEditarUsuario;
 import visao.telas_principais.TelaPesquisaUsuario;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.*;
 
 /**
  *
@@ -62,12 +66,50 @@ public class ControleUsuarios {
         
     }
     
-    public void editarUsuario(){
+    public void editarUsuario(JdlEditarUsuario telaEditar, Object... values) throws Exception{
+        try{
+        // Passo os atributos para o modelo
+        muser.setNome_usuario((String) values[0]);
+        muser.setCpf_usuario((String) values[1]);
+        muser.setEndereco_usuario((String) values[2]);
+        muser.setTelefone_usuario((String) values[3]);
+        muser.setData_usuario((String) values[4]);
+        muser.setEmail_usuario((String) values[5]);
+        muser.setSenha_usuario((String) values[6]);
+        muser.setCargo_usuario((String) values[7]);
+        muser.setId_usuario((Integer) values[8]);
+        
+        UsuariosDao userdao = new UsuariosDao();
+        
+        userdao.editarUsuario(
+            telaEditar,
+            muser.getNome_usuario(),
+            muser.getCpf_usuario(),
+            muser.getEndereco_usuario(),
+            muser.getTelefone_usuario(),
+            muser.getData_usuario(),
+            muser.getEmail_usuario(),
+            muser.getSenha_usuario(),
+            muser.getCargo_usuario(),
+            muser.getId_usuario()
+        );
+        
+         } catch (IllegalArgumentException e) {
+            // Captura a exceção de validação e propaga a exceção para o chamador
+            throw new IllegalArgumentException("Erro de validação: " + e.getMessage(), e);
+
+        } catch (Exception e) {
+            // Caso ocorra algum outro erro e propaga a exceção para o chamador
+            throw new Exception("Erro ao tentar salvar o usuário: " + e.getMessage(), e);
+        }
+        
         
     }
     
-    public void excluirUsuario(){
+    public void excluirUsuario(JdlEditarUsuario telaEditar, int id){
         
+        UsuariosDao dao = new UsuariosDao();
+        dao.excluirUsuario(telaEditar, id); // Passa o id do usuário para o DAO
     }
     
     public void listarUsuarios(JTable tabela){
@@ -120,5 +162,32 @@ public class ControleUsuarios {
                 usuario.getCargo_usuario()
             });
         }
+    }
+     
+    public void buscaEditar(JdlEditarUsuario telaEditar, int id){
+        
+        // Instanciar o Dao para buscar os dados no banco
+        UsuariosDao userdao = new UsuariosDao();
+        
+        // Chamar o método de busca no DAO passando o ID
+        ResultSet rs = userdao.buscarEditar(id);
+        
+        try {
+        if (rs.next()) {
+            // Preencher a tela de edição com os dados retornados do ResultSet
+            telaEditar.id = rs.getInt("id_usuario");
+            telaEditar.txtNome.setText(rs.getString("nome_usuario"));
+            telaEditar.txtCPF.setText(rs.getString("cpf_usuario"));
+            telaEditar.txtEndereco.setText(rs.getString("endereco_usuario"));
+            telaEditar.txtTelefone.setText(rs.getString("telefone_usuario"));
+            telaEditar.txtDataNasc.setText(rs.getString("data_usuario"));
+            telaEditar.txtEmail.setText(rs.getString("email_usuario"));
+            telaEditar.cmbCargo.setSelectedItem(rs.getString("cargo_usuario"));
+            // A senha pode ser deixada em branco ou você pode preencher com um valor inicial
+            telaEditar.txtSenha.setText("senha_usuario"); // Ou apenas deixe em branco se você não quiser mostrar a senha
+        }
+    } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(telaEditar, "Erro ao tentar resgatar dados: "+ex);
+    }
     }
 }

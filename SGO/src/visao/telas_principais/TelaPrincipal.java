@@ -20,6 +20,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import visao.telas_cadastro.JdlCadastroUsuario;
+import visao.telas_cadastro.JdlEditarUsuario;
 /**
  *
  * @author acer
@@ -48,6 +50,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     
     
     public JdlCadastroUsuario cadastro_usuario; 
+    public JdlEditarUsuario editar_usuario;
     
   
     
@@ -64,8 +67,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // Criação no Drawer
         criaDrawer();
         
-        // Instanciar o jdialog
+        // Instanciar os jdialogs
         cadastro_usuario = new JdlCadastroUsuario(this, true);
+        editar_usuario = new JdlEditarUsuario(this, true);
+        
     }
     
 

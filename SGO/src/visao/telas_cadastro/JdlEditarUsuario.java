@@ -4,23 +4,58 @@
  */
 package visao.telas_cadastro;
 
-import controle.ControleUsuarios;
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.LinearGradientPaint;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import util.elementos.PainelRedondo;
+import util.elementos.PainelGradienteCadastro;
+import controle.ControleUsuarios;
+import java.awt.event.MouseListener;
 
 /**
  *
  * @author acer
  */
 public class JdlEditarUsuario extends javax.swing.JDialog {
+    
+    public int id;
+    String cpf;
+    String telefone;
+    String nome;
+    String email;
+    String endereco;
+    String senha;
+    String rsenha;
+    String cargo;
+    String datanasc;
 
-    /**
-     * Creates new form JdlEditarCadastro
-     */
+    
+
     public JdlEditarUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocation(20, 200);
+        mascaraCampos();
+
+ 
     }
+    
+    public void limparCampos(){
+      txtCPF.setText("");
+      txtEmail.setText("");
+      txtEndereco.setText("");
+      txtNome.setText("");
+      txtSenha.setText("");
+      txtTelefone.setText("");
+      txtRSenha.setText("");
+      txtDataNasc.setText("");
+    } 
     
     public boolean verificarCampos(){
         
@@ -48,6 +83,30 @@ public class JdlEditarUsuario extends javax.swing.JDialog {
            return true;
        }
     }
+    
+    
+   public void mascaraCampos(){
+        
+        DefaultFormatterFactory formatoCPF = (DefaultFormatterFactory) txtCPF.getFormatterFactory();
+        DefaultFormatterFactory formatoTelefone = (DefaultFormatterFactory) txtTelefone.getFormatterFactory();
+        DefaultFormatterFactory formatoData = (DefaultFormatterFactory) txtTelefone.getFormatterFactory();
+        
+        MaskFormatter mascaraCPF = (MaskFormatter) formatoCPF.getDefaultFormatter();
+        MaskFormatter mascaraTelefone = (MaskFormatter) formatoTelefone.getDefaultFormatter();
+        MaskFormatter mascaraData = (MaskFormatter) formatoData.getDefaultFormatter();
+        
+        mascaraCPF.setAllowsInvalid(false);
+        mascaraTelefone.setAllowsInvalid(false);
+        mascaraData.setAllowsInvalid(false);
+        
+        
+        mascaraCPF.setValueContainsLiteralCharacters(false);
+        mascaraTelefone.setValueContainsLiteralCharacters(false);
+        mascaraData.setValueContainsLiteralCharacters(false);
+
+   }
+          
+        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,10 +149,13 @@ public class JdlEditarUsuario extends javax.swing.JDialog {
         txtDataNasc = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(911, 514));
+        setTitle("Editar Usuário");
+        setAlwaysOnTop(true);
+        setModal(true);
+        setResizable(false);
+        setType(java.awt.Window.Type.POPUP);
 
         jpnFundo.setBackground(new java.awt.Color(255, 255, 255));
-        jpnFundo.setPreferredSize(new java.awt.Dimension(911, 514));
 
         pnlNome.setBackground(new java.awt.Color(48, 58, 95));
         pnlNome.setLayout(new java.awt.BorderLayout());
@@ -282,7 +344,7 @@ public class JdlEditarUsuario extends javax.swing.JDialog {
                         .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtEndereco)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jpnFundoLayout.setVerticalGroup(
             jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,52 +386,65 @@ public class JdlEditarUsuario extends javax.swing.JDialog {
                 .addGap(30, 30, 30))
         );
 
-        getContentPane().add(jpnFundo, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpnFundo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpnFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-
-        if(verificarCampos()){
-            try{
-
-                // instancia do controlador
-                ControleUsuarios contuser = new ControleUsuarios();
-
-                // Tentando passar os dados
-                contuser.cadastrarUsuario(this,
-                    this.nome,
-                    this.cpf,
-                    this.endereco,
-                    this.telefone,
-                    txtDataNasc.getText(),
-                    this.email,
-                    this.senha,
-                    this.cargo
-                );
-
-                limparCampos();
-
-            } catch (IllegalArgumentException e) {
-                // Exibe a mensagem de erro gerada pela validação do modelo (por exemplo, CPF inválido)
-                JOptionPane.showMessageDialog(this, e.getMessage());
-
-            } catch (Exception e) {
-                // Exibe uma mensagem genérica em caso de outros erros
-                JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
-
-            }
-        } else{
-            JOptionPane.showMessageDialog(this, "Favor preencher todos os dados");
-        }
-
-    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         limparCampos();
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        if(verificarCampos()){
+            try{
+                
+                // instancia do controlador
+                ControleUsuarios contuser = new ControleUsuarios();
+                
+                // Tentando passar os dados
+                contuser.editarUsuario(this,
+                this.nome,
+                this.cpf,
+		this.endereco,
+                this.telefone,
+                txtDataNasc.getText(),
+                this.email,
+                this.senha,
+                this.cargo,
+                this.id
+                );
+                
+                limparCampos();
+                
+                
+                
+            } catch (IllegalArgumentException e) {
+            // Exibe a mensagem de erro gerada pela validação do modelo (por exemplo, CPF inválido)
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            
+            } catch (Exception e) {
+            // Exibe uma mensagem genérica em caso de outros erros
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+            
+            }
+        } else{
+            JOptionPane.showMessageDialog(this, "Favor preencher todos os dados");
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -396,6 +471,8 @@ public class JdlEditarUsuario extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JdlEditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -442,8 +519,8 @@ public class JdlEditarUsuario extends javax.swing.JDialog {
     public javax.swing.JTextField txtEmail;
     public javax.swing.JTextField txtEndereco;
     public javax.swing.JTextField txtNome;
-    private javax.swing.JPasswordField txtRSenha;
-    private javax.swing.JPasswordField txtSenha;
+    public javax.swing.JPasswordField txtRSenha;
+    public javax.swing.JPasswordField txtSenha;
     public javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }

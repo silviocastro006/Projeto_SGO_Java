@@ -33,8 +33,7 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
     String rsenha;
     String cargo;
     String datanasc;
-    public boolean isEditMode = false; // False: cadastro novo, True: edição
-    public int idEdicao = -1;          // Armazena o ID do registro em edição
+
     
 
     public JdlCadastroUsuario(java.awt.Frame parent, boolean modal) {

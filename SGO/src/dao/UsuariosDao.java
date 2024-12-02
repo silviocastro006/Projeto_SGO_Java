@@ -15,6 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import modelo.ModeloUsuarios;
 import visao.telas_cadastro.JdlCadastroUsuario;
+import visao.telas_cadastro.JdlEditarUsuario;
+import visao.telas_principais.TelaPesquisaUsuario;
+import visao.telas_principais.TelaPrincipal;
 
 
 /**
@@ -80,11 +83,85 @@ public class UsuariosDao {
         
     }
     
-    public void excluirUsuario(){
+    public void excluirUsuario(JdlEditarUsuario telaEditar, int id){
         
+        // Prepara a query
+        String sql = "DELETE FROM usuarios WHERE id_usuario = ?";
+
+        try  {
+
+            // Abrindo a conexão do banco
+            Connection conn = Conexao.getConexao();
+
+
+                // Criando um statement
+                stm = conn.prepareStatement(sql);
+
+                stm.setInt(1, id); // Passa o ID do usuário para a consulta
+
+                int rowsAffected = stm.executeUpdate(); // Executa a exclusão
+
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(telaEditar, "Usuário Excluido com Sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(telaEditar, "Erro ao excluir usuário");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(telaEditar, "Erro ao excluir usuário: " + e.getMessage());
+        }
     }
     
-    public void editarUsuario(){
+    public void editarUsuario(JdlEditarUsuario telaEditar, Object... values){
+        
+        // Statemente para cadastrar usuário
+        sql = "UPDATE usuarios SET "
+                + "nome_usuario = ?,"
+                + "cpf_usuario = ?,"
+                + "endereco_usuario = ?,"
+                + "telefone_usuario = ?,"
+                + "data_usuario = ?,"
+                + "email_usuario = ?,"
+                + "senha_usuario = ?,"
+                + "cargo_usuario = ?"
+                + "WHERE id_usuario = ?;";
+        
+        Connection conn = null;
+        
+        try {
+            // Abrindo a conexão do banco
+            conn = Conexao.getConexao();
+            
+            
+            // Criando um statement
+            stm = conn.prepareStatement(sql);
+            
+            // Passando os valores
+            stm.setString(1, (String) values[0]);
+            stm.setString(2, (String) values[1]);
+            stm.setString(3, (String) values[2]);
+            stm.setString(4, (String) values[3]);
+            stm.setString(5, (String) values[4]);
+            stm.setString(6, (String) values[5]);
+            stm.setString(7, (String) values[6]);
+            stm.setString(8, (String) values[7]);
+            stm.setInt(9, (int) values[8]);
+            
+            //Executando a query
+            stm.execute();
+            
+            // Fechando a conexão
+            Conexao.fecharConexao(conn, stm);
+            
+            JOptionPane.showMessageDialog(telaEditar, "Usuário atualizado com sucesso");
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(telaEditar, "Erro ao atualizar usuário "+e.getMessage());
+            
+        } finally{
+            
+            // Fechando a conexão
+            Conexao.fecharConexao(conn, stm);
+        } 
         
     }
     
@@ -96,7 +173,7 @@ public class UsuariosDao {
         // Criação de String sql para consulta
         String sql = "Select id_usuario, nome_usuario, cpf_usuario, "
                 + "endereco_usuario, telefone_usuario, data_usuario, "
-                + "email_usuario, cargo_usuario from usuarios;";
+                + "email_usuario, cargo_usuario, senha_usuario from usuarios;";
         
         Connection conn = null;
         ResultSet rs = null;
@@ -121,11 +198,12 @@ public class UsuariosDao {
                     usuario.setData_usuario(rs.getString("data_usuario"));
                     usuario.setEmail_usuario(rs.getString("email_usuario"));
                     usuario.setCargo_usuario(rs.getString("cargo_usuario"));
+                    usuario.setSenha_usuario(rs.getString("senha_usuario"));
                     
                     //adiciona valores à lista
                     lista_usuario.add(usuario);
                 }
- 
+  
             } catch (SQLException e) {
                 throw new RuntimeException("Erro ao consultar usuários: " + e.getMessage(), e);
             } finally {
@@ -176,6 +254,24 @@ public class UsuariosDao {
         return lista_usuario;    
     }
     
+    public ResultSet buscarEditar(int id){
+        
+        // Preparar a consulta SQL
+        String sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
+        ResultSet rs = null;
+        
+         try {
+        // Conectar ao banco e preparar a consulta
+        Connection conn = Conexao.getConexao();  // Método para obter conexão com o banco
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, id);  // Substitui o "?" pelo ID
+        
+        // Passa os dados para a tela de cadastro
+        rs = stmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-    
+        return rs;
+    }    
 }

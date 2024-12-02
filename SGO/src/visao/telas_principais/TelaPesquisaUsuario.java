@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import visao.telas_cadastro.JdlCadastroUsuario;
+import visao.telas_cadastro.JdlEditarUsuario;
 
 /**
  *
@@ -137,6 +138,84 @@ public class TelaPesquisaUsuario extends TelaPesquisaPadrao{
             }
             
         });
+        
+        btnEditar.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            // valor da linha selecionada
+            int row = tblConteudo.getSelectedRow();
+            
+            // Vamos verificar primeiramente se tem algo selecionado na tabela
+            if(row!= -1){
+                
+                // Pegando o id da linha selecionada
+                int id = (Integer) tblConteudo.getValueAt(row, 0);
+                
+                
+                
+                // Passa os dados para a tela de cadastro
+                TelaPrincipal principal = (TelaPrincipal) SwingUtilities.getWindowAncestor(TelaPesquisaUsuario.this);
+                JOptionPane.showMessageDialog(principal, "o valor de i aqui é "+id);
+                
+                
+                // Instanciar o Controle para fazer a busca no banco com as informações completas
+                ControleUsuarios controle = new ControleUsuarios();
+                controle.buscaEditar(principal.editar_usuario, id);
+                
+                // Mostar a tela
+                principal.editar_usuario.setVisible(true);
+                principal.editar_usuario.setLocation(20, 190);  // Ajuste de localização, se necessário
+                
+                // atualiza tabela
+                popularTabela();
+                
+            } else {
+                // Passa os dados para a tela de cadastro
+                TelaPrincipal principal = (TelaPrincipal) SwingUtilities.getWindowAncestor(TelaPesquisaUsuario.this);
+                JOptionPane.showMessageDialog(principal, "Favor selecinar um cadastro para editar");
+            }
+        }
+    });
+        
+        btnExcluir.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            //Pego a linha selecionada
+            int row = tblConteudo.getSelectedRow();
+            
+            // Se for diferente de nenhuma linha selecionada
+            if (row != -1) {
+                
+                // Pega o id do usuário
+                int id_usuario = (Integer) tblConteudo.getValueAt(row, 0);
+                
+                // Confirmação de exclusão
+                
+                // Passa os dados para a tela de cadastro
+                TelaPrincipal principal = (TelaPrincipal) SwingUtilities.getWindowAncestor(TelaPesquisaUsuario.this);
+                
+                int confirm = JOptionPane.showConfirmDialog(principal, 
+                    "Tem certeza que deseja excluir este usuário?", 
+                    "Confirmar Exclusão", JOptionPane.YES_NO_OPTION);
+                
+                // Se sim ele passa para o controlador instanciar o dao
+                if (confirm == JOptionPane.YES_OPTION) {
+                    // Chama o controle para excluir o usuário
+                    ControleUsuarios controle = new ControleUsuarios();
+                    controle.excluirUsuario(principal.editar_usuario, id_usuario);
+                    popularTabela();
+                }
+            } else {
+                // Passa os dados para a tela de cadastro
+                TelaPrincipal principal = (TelaPrincipal) SwingUtilities.getWindowAncestor(TelaPesquisaUsuario.this);
+                JOptionPane.showMessageDialog(principal, "Favor selecionar um cadastro para excluir");
+            }
+        }
+    });
+        
+        
               
        
     }
@@ -266,8 +345,7 @@ public class TelaPesquisaUsuario extends TelaPesquisaPadrao{
         
         
     });
-    
-    }   
+    }
  
 }
     
