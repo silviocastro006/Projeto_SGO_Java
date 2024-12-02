@@ -264,7 +264,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         btnFechar.setBackground(Color.decode("#495273"));
         btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/fechar_40.png"))); // NOI18N
-        btnFechar.setToolTipText("Fechar Sistema");
+        btnFechar.setToolTipText("fechar");
         btnFechar.setBorder(null);
         btnFechar.setBorderPainted(false);
         btnFechar.setContentAreaFilled(false);
@@ -277,7 +277,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         btnMinimizar.setBackground(Color.decode("#495273"));
         btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/minimizar_40.png"))); // NOI18N
-        btnMinimizar.setToolTipText("Minimizar");
+        btnMinimizar.setToolTipText("minimizar");
         btnMinimizar.setBorder(null);
         btnMinimizar.setBorderPainted(false);
         btnMinimizar.setContentAreaFilled(false);
@@ -302,8 +302,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuSupLayout.setVerticalGroup(
             MenuSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-            .addComponent(btnMinimizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(MenuSupLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnMinimizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         CardPanel.setBackground(new java.awt.Color(255, 255, 255));

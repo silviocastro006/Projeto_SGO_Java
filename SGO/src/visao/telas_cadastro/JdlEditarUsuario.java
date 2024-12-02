@@ -4,58 +4,23 @@
  */
 package visao.telas_cadastro;
 
-import java.awt.Color;
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.LinearGradientPaint;
-import javax.swing.JFormattedTextField;
-import javax.swing.JOptionPane;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
-import util.elementos.PainelRedondo;
-import util.elementos.PainelGradienteCadastro;
 import controle.ControleUsuarios;
-import java.awt.event.MouseListener;
+import javax.swing.JOptionPane;
+import util.elementos.PainelRedondo;
 
 /**
  *
  * @author acer
  */
-public class JdlCadastroUsuario extends javax.swing.JDialog {
-    
-    String cpf;
-    String telefone;
-    String nome;
-    String email;
-    String endereco;
-    String senha;
-    String rsenha;
-    String cargo;
-    String datanasc;
-    public boolean isEditMode = false; // False: cadastro novo, True: edição
-    public int idEdicao = -1;          // Armazena o ID do registro em edição
-    
+public class JdlEditarUsuario extends javax.swing.JDialog {
 
-    public JdlCadastroUsuario(java.awt.Frame parent, boolean modal) {
+    /**
+     * Creates new form JdlEditarCadastro
+     */
+    public JdlEditarUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setLocation(20, 200);
-        mascaraCampos();
-        habilitarCampos();
- 
     }
-    
-    public void limparCampos(){
-      txtCPF.setText("");
-      txtEmail.setText("");
-      txtEndereco.setText("");
-      txtNome.setText("");
-      txtSenha.setText("");
-      txtTelefone.setText("");
-      txtRSenha.setText("");
-      txtDataNasc.setText("");
-    } 
     
     public boolean verificarCampos(){
         
@@ -83,81 +48,6 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
            return true;
        }
     }
-    
-    
-   public void mascaraCampos(){
-        
-        DefaultFormatterFactory formatoCPF = (DefaultFormatterFactory) txtCPF.getFormatterFactory();
-        DefaultFormatterFactory formatoTelefone = (DefaultFormatterFactory) txtTelefone.getFormatterFactory();
-        DefaultFormatterFactory formatoData = (DefaultFormatterFactory) txtTelefone.getFormatterFactory();
-        
-        MaskFormatter mascaraCPF = (MaskFormatter) formatoCPF.getDefaultFormatter();
-        MaskFormatter mascaraTelefone = (MaskFormatter) formatoTelefone.getDefaultFormatter();
-        MaskFormatter mascaraData = (MaskFormatter) formatoData.getDefaultFormatter();
-        
-        mascaraCPF.setAllowsInvalid(false);
-        mascaraTelefone.setAllowsInvalid(false);
-        mascaraData.setAllowsInvalid(false);
-        
-        
-        mascaraCPF.setValueContainsLiteralCharacters(false);
-        mascaraTelefone.setValueContainsLiteralCharacters(false);
-        mascaraData.setValueContainsLiteralCharacters(false);
-
-   }
-   
-   
-   public void habilitarCampos(){
-       
-       // Permite edição dos campos
-        txtNome.setEditable(true);
-        txtCPF.setEditable(true);
-        txtDataNasc.setEditable(true);
-        txtEndereco.setEditable(true);
-        txtTelefone.setEditable(true);
-        cmbCargo.setEditable(true);
-        txtEmail.setEditable(true);
-        txtSenha.setEnabled(true);
-        txtRSenha.setEnabled(true);
-       
-       
-       // Desabilita os botões, caso você tenha botões como "Salvar" ou "Editar"
-        btnSalvar.setEnabled(true);
-        btnCancelar.setEnabled(true);
-        btnSalvar.setBackground(new Color(58,109,43));
-        btnCancelar.setBackground(new Color(120,32,32));
-   }
-   
-   
-   
-   
-   public void desabilitarCampos() {
-    
-    // Tira a permissão de editar os campos
-    txtNome.setEditable(false);
-    txtCPF.setEditable(false);
-    txtDataNasc.setEditable(false);
-    txtEndereco.setEditable(false);
-    txtTelefone.setEditable(false);
-    cmbCargo.setEditable(false);
-    txtEmail.setEditable(false);
-    txtSenha.setEnabled(false);
-    txtRSenha.setEnabled(false);
-
-    // Desabilita os botões, caso você tenha botões como "Salvar" ou "Editar"
-    btnSalvar.setEnabled(false);
-    btnCancelar.setEnabled(false);
-    btnSalvar.setBackground(Color.lightGray);
-    btnCancelar.setBackground(Color.lightGray);
-    
-    
-}
-   
-   
-   
-    
-               
-        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -193,20 +83,17 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
         pnlCargo = new PainelRedondo();
         lblCargo = new javax.swing.JLabel();
         cmbCargo = new javax.swing.JComboBox<>();
-        btnSalvar = new util.elementos.BotaoPrincipal();
+        btnAtualizar = new util.elementos.BotaoPrincipal();
         btnCancelar = new util.elementos.BotaoPrincipal();
         txtCPF = new javax.swing.JFormattedTextField();
         txtTelefone = new javax.swing.JFormattedTextField();
         txtDataNasc = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Usuário");
-        setAlwaysOnTop(true);
-        setModal(true);
-        setResizable(false);
-        setType(java.awt.Window.Type.POPUP);
+        setPreferredSize(new java.awt.Dimension(911, 514));
 
         jpnFundo.setBackground(new java.awt.Color(255, 255, 255));
+        jpnFundo.setPreferredSize(new java.awt.Dimension(911, 514));
 
         pnlNome.setBackground(new java.awt.Color(48, 58, 95));
         pnlNome.setLayout(new java.awt.BorderLayout());
@@ -303,14 +190,14 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
         cmbCargo.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         cmbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Funcionario" }));
 
-        btnSalvar.setBackground(new java.awt.Color(58, 109, 43));
-        btnSalvar.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/salvar_32.png"))); // NOI18N
-        btnSalvar.setText("Salvar");
-        btnSalvar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
-        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+        btnAtualizar.setBackground(new java.awt.Color(58, 109, 43));
+        btnAtualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/salvar_32.png"))); // NOI18N
+        btnAtualizar.setText("Atualizar");
+        btnAtualizar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarActionPerformed(evt);
+                btnAtualizarActionPerformed(evt);
             }
         });
 
@@ -380,7 +267,7 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(txtNome))
                     .addGroup(jpnFundoLayout.createSequentialGroup()
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpnFundoLayout.createSequentialGroup()
@@ -395,7 +282,7 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
                         .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtEndereco)))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnFundoLayout.setVerticalGroup(
             jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -432,68 +319,57 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
                     .addComponent(pnlSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpnFundo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpnFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        getContentPane().add(jpnFundo, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+
+        if(verificarCampos()){
+            try{
+
+                // instancia do controlador
+                ControleUsuarios contuser = new ControleUsuarios();
+
+                // Tentando passar os dados
+                contuser.cadastrarUsuario(this,
+                    this.nome,
+                    this.cpf,
+                    this.endereco,
+                    this.telefone,
+                    txtDataNasc.getText(),
+                    this.email,
+                    this.senha,
+                    this.cargo
+                );
+
+                limparCampos();
+
+            } catch (IllegalArgumentException e) {
+                // Exibe a mensagem de erro gerada pela validação do modelo (por exemplo, CPF inválido)
+                JOptionPane.showMessageDialog(this, e.getMessage());
+
+            } catch (Exception e) {
+                // Exibe uma mensagem genérica em caso de outros erros
+                JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+
+            }
+        } else{
+            JOptionPane.showMessageDialog(this, "Favor preencher todos os dados");
+        }
+
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         limparCampos();
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        
-        if(verificarCampos()){
-            try{
-                
-                // instancia do controlador
-                ControleUsuarios contuser = new ControleUsuarios();
-                
-                // Tentando passar os dados
-                contuser.cadastrarUsuario(this,
-                this.nome,
-                this.cpf,
-		this.endereco,
-                this.telefone,
-                txtDataNasc.getText(),
-                this.email,
-                this.senha,
-                this.cargo
-                );
-                
-                limparCampos();
-                
-            } catch (IllegalArgumentException e) {
-            // Exibe a mensagem de erro gerada pela validação do modelo (por exemplo, CPF inválido)
-            JOptionPane.showMessageDialog(this, e.getMessage());
-            
-            } catch (Exception e) {
-            // Exibe uma mensagem genérica em caso de outros erros
-            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
-            
-            }
-        } else{
-            JOptionPane.showMessageDialog(this, "Favor preencher todos os dados");
-        }
-        
-        
-        
-    }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -512,13 +388,13 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JdlCadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JdlEditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JdlCadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JdlEditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JdlCadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JdlEditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JdlCadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JdlEditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -526,7 +402,7 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JdlCadastroUsuario dialog = new JdlCadastroUsuario(new javax.swing.JFrame(), true);
+                JdlEditarUsuario dialog = new JdlEditarUsuario(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -539,8 +415,8 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private util.elementos.BotaoPrincipal btnAtualizar;
     private util.elementos.BotaoPrincipal btnCancelar;
-    private util.elementos.BotaoPrincipal btnSalvar;
     public javax.swing.JComboBox<String> cmbCargo;
     private javax.swing.JPanel jpnFundo;
     private javax.swing.JLabel lblCPF;

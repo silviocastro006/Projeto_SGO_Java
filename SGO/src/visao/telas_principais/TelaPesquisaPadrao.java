@@ -4,21 +4,30 @@
  */
 package visao.telas_principais;
 
+import com.sun.jdi.connect.spi.Connection;
+import dao.Conexao;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LinearGradientPaint;
 import javax.swing.table.DefaultTableCellRenderer;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+
+
 
 public class TelaPesquisaPadrao extends javax.swing.JPanel {
 
-    
-    
-    
-    
+    private Connection conn = null;
+
     
     public TelaPesquisaPadrao(){
+        
+        
         
         // Configurações iniciais da tela
         initComponents();
@@ -36,7 +45,29 @@ public class TelaPesquisaPadrao extends javax.swing.JPanel {
         DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) tblConteudo.getTableHeader().getDefaultRenderer();
         renderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
         
+        
+        // Adiciona o listener para quando o painel se tornar visível e popula a tabela
+        this.addAncestorListener(new javax.swing.event.AncestorListener() {
+            @Override
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                popularTabela(); // Chama a função para popular a tabela
+            }
+
+            @Override
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+                // Não é necessário fazer nada aqui
+            }
+
+            @Override
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                // Não é necessário fazer nada aqui
+            }
+        });
+
+        
     }
+
+    
     
     @Override
     protected void paintComponent(Graphics g) {
@@ -58,7 +89,15 @@ public class TelaPesquisaPadrao extends javax.swing.JPanel {
         // Preencher o painel com o gradiente
         g2d.fillRect(0, 0, getWidth(), getHeight());
     }
-
+    
+    // Função genérica para popular a tabela a ser reescrita por todos as telas
+    // ela demora um pouco para carregar, mas coloquei quando clicar nos botões principais
+    // no construtor e quando a tela é visivel
+    
+    public void popularTabela() {
+        
+    }
+    
     
     
     
@@ -87,6 +126,11 @@ public class TelaPesquisaPadrao extends javax.swing.JPanel {
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1366, 768));
         setRequestFocusEnabled(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         lblIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_padrao/usuarios_azul_80.png"))); // NOI18N
@@ -107,6 +151,14 @@ public class TelaPesquisaPadrao extends javax.swing.JPanel {
         txtpesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtpesquisaActionPerformed(evt);
+            }
+        });
+        txtpesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtpesquisaKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtpesquisaKeyTyped(evt);
             }
         });
 
@@ -243,6 +295,19 @@ public class TelaPesquisaPadrao extends javax.swing.JPanel {
 
     private void btnCadastrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseEntered
     }//GEN-LAST:event_btnCadastrarMouseEntered
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+
+    }//GEN-LAST:event_formComponentShown
+
+    private void txtpesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpesquisaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpesquisaKeyPressed
+
+    private void txtpesquisaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpesquisaKeyTyped
+        // Código a ser sobrescrito por todas as tabelas
+        
+    }//GEN-LAST:event_txtpesquisaKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
