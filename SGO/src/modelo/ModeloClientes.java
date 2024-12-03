@@ -44,11 +44,19 @@ public class ModeloClientes {
     }
 
     public void setCpf(String cpf) {
-        if(ValidarCPF.validarCPF(cpf)){
+        
+        // Se o CPF for vazio ou nulo, define como null
+        if (cpf == null || cpf.equals("")) {
+            this.cpf = null;
+            return;  // Não valida se o CPF é nulo ou vazio
+        }
+
+        // Se for um CPF válido, define o valor
+        if (ValidarCPF.validarCPF(cpf)) {
             this.cpf = cpf;
-        }else{
+        } else {
             throw new IllegalArgumentException("CPF inválido");
-        } 
+        }
     }
 
     public String getRaz_social() {
@@ -64,9 +72,17 @@ public class ModeloClientes {
     }
 
     public void setCnpj(String cnpj) {
-        if(ValidarCPF.validarCPF(cnpj)){
+        
+        // Se o CNPJ for vazio ou nulo, define como null
+        if (cnpj == null || cnpj.equals("")) {
+            this.cnpj = null;
+            return;  // Não valida se o CNPJ é nulo ou vazio
+        }
+
+        // Se for um CNPJ válido, define o valor
+        if (ValidarCNPJ.validarCNPJ(cnpj)) {  // Corrigido para usar o Validador de CNPJ
             this.cnpj = cnpj;
-        }else{
+        } else {
             throw new IllegalArgumentException("CNPJ inválido");
         }
     }

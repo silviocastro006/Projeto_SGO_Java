@@ -75,7 +75,7 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
        
         // Verificar campos obrigatórios
         if(this.tipo.equals("PF") &&
-            this.cpf.isEmpty() ||
+            this.cpf.isEmpty()||
             this.nome.isEmpty() ||
             this.telefone.isEmpty() ||
             this.email.isEmpty() ||
