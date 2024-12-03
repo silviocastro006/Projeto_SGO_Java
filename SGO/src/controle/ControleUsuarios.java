@@ -113,6 +113,7 @@ public class ControleUsuarios {
     }
     
     public void listarUsuarios(JTable tabela){
+        // Função para popular a tabela
         
         // instanciar o DAO
         UsuariosDao dao = new UsuariosDao();
@@ -140,6 +141,8 @@ public class ControleUsuarios {
     }
     
     public void listarUsuarios(JTable tabela, String sql){
+        
+        // Função para carregar a tabela dinamixa
         
         // instanciar o DAO
         UsuariosDao dao = new UsuariosDao();
@@ -184,7 +187,8 @@ public class ControleUsuarios {
             telaEditar.txtEmail.setText(rs.getString("email_usuario"));
             telaEditar.cmbCargo.setSelectedItem(rs.getString("cargo_usuario"));
             // A senha pode ser deixada em branco ou você pode preencher com um valor inicial
-            telaEditar.txtSenha.setText("senha_usuario"); // Ou apenas deixe em branco se você não quiser mostrar a senha
+            telaEditar.txtSenha.setText("senha_usuario");
+            telaEditar.txtRSenha.setText("senha_usuario"); 
         }
     } catch (SQLException ex) {
             JOptionPane.showConfirmDialog(telaEditar, "Erro ao tentar resgatar dados: "+ex);

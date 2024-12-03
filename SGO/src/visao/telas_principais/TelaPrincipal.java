@@ -20,7 +20,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import visao.telas_cadastro.JdlCadastroCliente;
 import visao.telas_cadastro.JdlCadastroUsuario;
+import visao.telas_cadastro.JdlEditarCliente;
 import visao.telas_cadastro.JdlEditarUsuario;
 /**
  *
@@ -51,6 +53,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     
     public JdlCadastroUsuario cadastro_usuario; 
     public JdlEditarUsuario editar_usuario;
+    public JdlCadastroCliente cadastro_cliente;
+    public JdlEditarCliente editar_cliente;
+    
     
   
     
@@ -70,6 +75,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // Instanciar os jdialogs
         cadastro_usuario = new JdlCadastroUsuario(this, true);
         editar_usuario = new JdlEditarUsuario(this, true);
+        cadastro_cliente = new JdlCadastroCliente(this, true);
+        editar_cliente = new JdlEditarCliente(this, true);
         
     }
     

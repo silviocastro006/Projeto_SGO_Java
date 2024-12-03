@@ -156,8 +156,6 @@ public class TelaPesquisaUsuario extends TelaPesquisaPadrao{
                 
                 // Passa os dados para a tela de cadastro
                 TelaPrincipal principal = (TelaPrincipal) SwingUtilities.getWindowAncestor(TelaPesquisaUsuario.this);
-                JOptionPane.showMessageDialog(principal, "o valor de i aqui é "+id);
-                
                 
                 // Instanciar o Controle para fazer a busca no banco com as informações completas
                 ControleUsuarios controle = new ControleUsuarios();

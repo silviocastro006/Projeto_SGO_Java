@@ -167,6 +167,8 @@ public class UsuariosDao {
     
     public List<ModeloUsuarios> carregarUsuarios(){
         
+        // Função para popular a tabela
+        
         // lista pública para armazenar os clientes
         List<ModeloUsuarios> lista_usuario = new ArrayList<>();
         
@@ -215,6 +217,8 @@ public class UsuariosDao {
     
     public List<ModeloUsuarios> carregarUsuarios(String sql){
         
+        // Função para carregar a tabela dinamica
+        
         // lista pública para armazenar os clientes
         List<ModeloUsuarios> lista_usuario = new ArrayList<>();
         
@@ -257,7 +261,7 @@ public class UsuariosDao {
     public ResultSet buscarEditar(int id){
         
         // Preparar a consulta SQL
-        String sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
+        String sql = "SELECT * FROM cliente WHERE id_cliente = ?";
         ResultSet rs = null;
         
          try {
