@@ -12,7 +12,6 @@ import modelo.ModeloClientes;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import visao.telas_cadastro.JdlCadastroCliente;
-import visao.telas_cadastro.JdlEditarCliente;
 import visao.telas_principais.TelaPesquisaCliente;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,15 +27,18 @@ public class ControleClientes {
      
     
     public void cadastrarCliente(JdlCadastroCliente telaCadastro, Object... values) throws Exception{
-                
+        
         try{
         // Passo os atributos para o modelo
-            mcli.setTipo_cliente((String) values[0]); // "PF" ou "PJ"
-            mcli.setCpfCnpj((String) values[1]); // CPF ou CNPJ
-            mcli.setNomeRazao((String) values[2]); // Nome ou Razão Social
-            mcli.setTelefone_cliente((String) values[3]);
-            mcli.setEmail_cliente((String) values[4]);
-            mcli.setEndereco_cliente((String) values[5]);
+            mcli.setTipo_cliente((String) values[0]);
+            mcli.setNome_cliente((String) values[1]);
+            mcli.setCpf((String) values[2]);
+            mcli.setRaz_social((String) values[3]);
+            mcli.setCnpj((String) values[4]);
+            mcli.setTelefone_cliente((String) values[5]);
+            mcli.setEmail_cliente((String) values[6]);
+            mcli.setEndereco_cliente((String) values[7]);
+            
            
         
         ClientesDao clientesdao = new ClientesDao();
@@ -48,10 +50,11 @@ public class ControleClientes {
         
         clientesdao.cadastrarCliente(
             telaCadastro,
-            tipocliente,
             mcli.getTipo_cliente(),
-            mcli.getNomeRazao(),
-            mcli.getCpfCnpj(),
+            mcli.getNome_cliente(),
+            mcli.getCpf(),
+            mcli.getRaz_social(),
+            mcli.getCnpj(),
             mcli.getTelefone_cliente(),
             mcli.getEmail_cliente(),
             mcli.getEndereco_cliente()
@@ -66,30 +69,61 @@ public class ControleClientes {
             throw new Exception("Erro ao tentar salvar o cliente: " + e.getMessage(), e);
         }
         
-    }
+                
+    } 
     
-    public void editarCliente(JdlEditarCliente telaEditar, String tipoCliente, Object... values) throws Exception{
+    public void editarCliente(JdlCadastroCliente telaEditar, String tipoCliente, Object... values) throws Exception{
+        
+         try{
+        // Passo os atributos para o modelo
+            mcli.setTipo_cliente((String) values[0]);
+            mcli.setNome_cliente((String) values[1]);
+            mcli.setCpf((String) values[2]);
+            mcli.setRaz_social((String) values[3]);
+            mcli.setCnpj((String) values[4]);
+            mcli.setTelefone_cliente((String) values[5]);
+            mcli.setEmail_cliente((String) values[6]);
+            mcli.setEndereco_cliente((String) values[7]);
+            mcli.setId_cliente((int) values[8]);
+        
+        ClientesDao clientedao = new ClientesDao();
+        
+        clientedao.editarCliente(
+            telaEditar,
+            mcli.getTipo_cliente(),
+            mcli.getNome_cliente(),
+            mcli.getCpf(),
+            mcli.getRaz_social(),
+            mcli.getCnpj(),
+            mcli.getTelefone_cliente(),
+            mcli.getEmail_cliente(),
+            mcli.getEndereco_cliente()
+        );
+        
+         } catch (IllegalArgumentException e) {
+            // Captura a exceção de validação e propaga a exceção para o chamador
+            throw new IllegalArgumentException("Erro de validação: " + e.getMessage(), e);
 
-        // Chama o método do DAO para editar o cliente
-        ClientesDao clientesDao = new ClientesDao();
-        clientesDao.editarCliente(telaEditar, tipoCliente, values);
-        
+        } catch (Exception e) {
+            // Caso ocorra algum outro erro e propaga a exceção para o chamador
+            throw new Exception("Erro ao tentar salvar o usuário: " + e.getMessage(), e);
+        }
         
     }
     
-    public void excluirCliente(JdlEditarCliente telaEditar, int id){
+    public void excluirCliente(JdlCadastroCliente telaEditar, int id){
         
-        ClientesDao clientesDao = new ClientesDao();
-        clientesDao.excluirCliente(telaEditar, id); // Passa o ID do cliente para o DAO
+        ClientesDao dao = new ClientesDao();
+        dao.excluirCliente(telaEditar, id); // Passa o id do usuário para o DAO
+        
     }
     
     public void listarClientes(JTable tabela){
-        
-        // carregar tabela padrão
+        // Função para popular a tabela
         
         // instanciar o DAO
-        ClientesDao clientesDao = new ClientesDao();
-        List<ModeloClientes> listaClientes = clientesDao.carregarClientes();
+        ClientesDao dao = new ClientesDao();
+        List<ModeloClientes> lista_cliente = dao.carregarClientes();
         
         // manipular a tabela da view
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
@@ -97,66 +131,49 @@ public class ControleClientes {
 
         
         
-        // Povoar a tabela com as informações do banco
-        for (ModeloClientes cliente : listaClientes) {
-            model.addRow(new Object[] {
+        // povoar a tabela com as informações do sql
+        for (ModeloClientes cliente : lista_cliente) {
+            model.addRow(new Object[]{
                 cliente.getId_cliente(),
                 cliente.getTipo_cliente(),
-                cliente.getCpfCnpj(),
-                cliente.getNomeRazao(),
+                cliente.getNome_cliente(),
+                cliente.getRaz_social(),
+                cliente.getCpf(),
+                cliente.getCnpj(), 
                 cliente.getTelefone_cliente(),
                 cliente.getEmail_cliente(),
                 cliente.getEndereco_cliente()
             });
         }
+ 
     }
     
-    public void listarClientes(JTable tabela, String sql){
-        
-        // carregar tabela dinamica
+    public void listarClientesDinamico(JTable tabela, String sql){
+        // Função para carregar a tabela dinamixa
         
         // instanciar o DAO
-        ClientesDao clientesDao = new ClientesDao();
-        List<ModeloClientes> listaClientes = clientesDao.carregarClientes(sql);
+        ClientesDao dao = new ClientesDao();
+        List<ModeloClientes> lista_cliente = dao.carregarClientesDinamico(sql);
         
         // manipular a tabela da view
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         model.setNumRows(0); // Limpa os dados existentes
 
-        // Povoar a tabela com as informações do banco
-        for (ModeloClientes cliente : listaClientes) {
-            model.addRow(new Object[] {
+        // povoar a tabela com as informações do sql
+        for (ModeloClientes cliente : lista_cliente) {
+            model.addRow(new Object[]{
                 cliente.getId_cliente(),
                 cliente.getTipo_cliente(),
-                cliente.getCpfCnpj(),
-                cliente.getNomeRazao(),
+                cliente.getNome_cliente(),
+                cliente.getRaz_social(),
+                cliente.getCpf(),
+                cliente.getCnpj(), 
                 cliente.getTelefone_cliente(),
                 cliente.getEmail_cliente(),
                 cliente.getEndereco_cliente()
             });
         }
+        
     }
      
-    public void buscaEditar(JdlEditarCliente telaEditar, int id){
-        
-        // Instanciar o Dao para buscar os dados no banco
-        ClientesDao clientesDao = new ClientesDao();
-        
-        // Chamar o método de busca no DAO passando o ID
-        ResultSet rs = clientesDao.buscarEditar(id);
-        
-        try {
-        if (rs.next()) {
-            // Preencher os campos da tela de edição
-                telaEditar.cmbTipo.setSelectedItem(rs.getString("tipo_cliente"));
-                telaEditar.txtCpfCnpj.setText(rs.getString("cpfCnpj"));
-                telaEditar.txtNomeRazao.setText(rs.getString("nomeRazao"));
-                telaEditar.txtTelefone.setText(rs.getString("telefone_cliente"));
-                telaEditar.txtEmail.setText(rs.getString("email_cliente"));
-                telaEditar.txtEndereco.setText(rs.getString("endereco_cliente"));
-        }
-    } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(telaEditar, "Erro ao tentar resgatar dados: "+ex);
-    }
-    }
 }

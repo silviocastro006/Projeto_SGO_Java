@@ -23,13 +23,17 @@ import java.awt.event.MouseListener;
  * @author acer
  */
 public class JdlCadastroCliente extends javax.swing.JDialog {
-    
-    String cpf_cpnj;
-    String telefone;
-    String nome;
-    String email;
-    String endereco;
-    String tipo;
+   
+   public int id;
+   String tipo;
+   String nome;
+   String cpf;
+   String razsocial;
+   String cnpj;
+   String telefone;
+   String email;
+   String endereco;
+   public boolean modoEdicao = false;  // Controle do modo de edição
 
     
 
@@ -38,103 +42,110 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
         initComponents();
         setLocation(20, 200);
         mascaraCampos();
-        habilitarCampos();
-        configurarListenerCmbTipo(); // Adiciona o listener ao combo box
+        habilitarCamposTotal();
+        
+        
  
-    }
-    
-    private void configurarListenerCmbTipo() {
-    cmbTipo.addActionListener(e -> {
-        String tipoSelecionado = cmbTipo.getSelectedItem().toString();
-        if (tipoSelecionado.equals("PF")) {
-            alterarMascaraCPFouCNPJ("###.###.###-##"); // Máscara para CPF
-            CPF_CNPJ.setText("CPF"); // Atualiza o label
-            this.lblNome.setText("Nome");
-        } else if (tipoSelecionado.equals("PJ")) {
-            alterarMascaraCPFouCNPJ("##.###.###/####-##"); // Máscara para CNPJ
-            CPF_CNPJ.setText("CNPJ"); // Atualiza o label
-            this.lblNome.setText("Raz Social");
-        }
-    });
-    }
-    
-    private void alterarMascaraCPFouCNPJ(String mascara) {
-    try {
-        txtCpfCnpj.setFormatterFactory(
-            new DefaultFormatterFactory(new MaskFormatter(mascara))
-        );
-    } catch (java.text.ParseException ex) {
-        JOptionPane.showMessageDialog(this, "Erro ao aplicar a máscara: " + ex.getMessage());
-    }
-    }       
+    }      
     
     
-    public void limparCampos(){
-      txtCpfCnpj.setText("");
+   public void limparCampos(){
+      txtNome.setText("");
+      txtCPF.setText("");
+      txtRazSocial.setText("");
+      txtCNPJ.setText("");
+      txtTelefone.setText("");
       txtEmail.setText("");
       txtEndereco.setText("");
-      txtNomeRazao.setText("");
-      txtTelefone.setText("");
     } 
-    
-    public boolean verificarCampos(){
+   
+   
+   public boolean verificarCampos(){
         
-       // Remover formatações e capturar valores
-        this.cpf_cpnj = txtCpfCnpj.getText().trim().replace(".", "").replace("-", "").replace("/", "");
+        // Remover formatações e capturar valores
+        this.tipo = cmbTipo.getSelectedItem().toString();
+        this.nome = txtNome.getText().trim();
+        this.cpf = txtCPF.getText().trim().replace(".", "").replace("-", "").replace("/", "");
+        this.razsocial = txtRazSocial.getText().trim();
+        this.cpf = txtCNPJ.getText().trim().replace(".", "").replace("-", "").replace("/", "");
         this.telefone = txtTelefone.getText().trim().replace("(", "").replace(")", "").replace("-", "").replace(" ", "");
-        this.nome = txtNomeRazao.getText().trim();
         this.email = txtEmail.getText().trim();
         this.endereco = txtEndereco.getText().trim();
-        this.tipo = cmbTipo.getSelectedItem().toString();
+        
        
         // Verificar campos obrigatórios
-        if (this.cpf_cpnj.isEmpty() ||
+        if(this.tipo.equals("PF") &&
+            this.cpf.isEmpty() ||
+            this.nome.isEmpty() ||
             this.telefone.isEmpty() ||
             this.email.isEmpty() ||
-            this.endereco.isEmpty() ||
-            this.nome.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Favor preencher todos os dados.");
-        return false;
+            this.endereco.isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Favor preencher todos os dados de Pessoa Física.");
+            return false;
+        }
+        
+        if(this.tipo.equals("PJ") &&
+            this.cnpj.isEmpty() ||
+            this.razsocial.isEmpty() ||
+            this.telefone.isEmpty() ||
+            this.email.isEmpty() ||
+            this.endereco.isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Favor preencher todos os dados de Pessoa Jurídica.");
+            return false;
         }
 
         return true;
-       }
+    }
     
     
    public void mascaraCampos(){
         
-        DefaultFormatterFactory formatoCPF = (DefaultFormatterFactory) txtCpfCnpj.getFormatterFactory();
+       DefaultFormatterFactory formatoCPF = (DefaultFormatterFactory) txtCPF.getFormatterFactory();
+        DefaultFormatterFactory formatoCNPJ = (DefaultFormatterFactory) txtCNPJ.getFormatterFactory();
         DefaultFormatterFactory formatoTelefone = (DefaultFormatterFactory) txtTelefone.getFormatterFactory();
-        DefaultFormatterFactory formatoData = (DefaultFormatterFactory) txtTelefone.getFormatterFactory();
         
         MaskFormatter mascaraCPF = (MaskFormatter) formatoCPF.getDefaultFormatter();
+        MaskFormatter mascaraCNPJ = (MaskFormatter) formatoCNPJ.getDefaultFormatter();
         MaskFormatter mascaraTelefone = (MaskFormatter) formatoTelefone.getDefaultFormatter();
-        MaskFormatter mascaraData = (MaskFormatter) formatoData.getDefaultFormatter();
         
         mascaraCPF.setAllowsInvalid(false);
+        mascaraCNPJ.setAllowsInvalid(false);
         mascaraTelefone.setAllowsInvalid(false);
-        mascaraData.setAllowsInvalid(false);
-        
-        
+
         mascaraCPF.setValueContainsLiteralCharacters(false);
+        mascaraCNPJ.setValueContainsLiteralCharacters(false);
         mascaraTelefone.setValueContainsLiteralCharacters(false);
-        mascaraData.setValueContainsLiteralCharacters(false);
 
    }
    
    
-   public void habilitarCampos(){
+   public void habilitarCamposTotal(){
        
-       // Permite edição dos campos
-        txtNomeRazao.setEditable(true);
-        txtCpfCnpj.setEditable(true);
-        txtEndereco.setEditable(true);
-        txtTelefone.setEditable(true);
-        cmbTipo.setEditable(true);
-        txtEmail.setEditable(true);
+       // devolve as cores originais
+       pnlTipo.setBackground(new Color(48,58,95));
+       pnlNome.setBackground(new Color(48,58,95));
+       pnlCPF.setBackground(new Color(48,58,95));
+       pnlRazSocial.setBackground(new Color(48,58,95));
+       pnlCNPJ.setBackground(new Color(48,58,95));
+       pnlTelefone.setBackground(new Color(48,58,95));
+       pnlEmail.setBackground(new Color(48,58,95));
+       pnlEndereco.setBackground(new Color(48,58,95));
+
        
+       // habilita os campos para edição
+       cmbTipo.setEditable(true);
+       txtNome.setEditable(true);
+       txtCPF.setEditable(true);
+       txtRazSocial.setEditable(true);
+       txtCNPJ.setEditable(true);
+       txtTelefone.setEditable(true);
+       txtEmail.setEditable(true);
+       txtEndereco.setEditable(true);
        
-       // Desabilita os botões, caso você tenha botões como "Salvar" ou "Editar"
+
+       // Habilitar os botões de salvar e cancelar
         btnSalvar.setEnabled(true);
         btnCancelar.setEnabled(true);
         btnSalvar.setBackground(new Color(58,109,43));
@@ -142,32 +153,125 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
    }
    
    
-   
-   
-   public void desabilitarCampos() {
+   public void desabilitarCamposTotal() {
     
-    // Tira a permissão de editar os campos
-    txtNomeRazao.setEditable(false);
-    txtCpfCnpj.setEditable(false);
-    txtEndereco.setEditable(false);
-    txtTelefone.setEditable(false);
-    cmbTipo.setEditable(false);
-    txtEmail.setEditable(false);
+    // devolve as cores originais
+       pnlTipo.setBackground(Color.LIGHT_GRAY);
+       pnlNome.setBackground(Color.LIGHT_GRAY);
+       pnlCPF.setBackground(Color.LIGHT_GRAY);
+       pnlRazSocial.setBackground(Color.LIGHT_GRAY);
+       pnlCNPJ.setBackground(Color.LIGHT_GRAY);
+       pnlTelefone.setBackground(Color.LIGHT_GRAY);
+       pnlEmail.setBackground(Color.LIGHT_GRAY);
+       pnlEndereco.setBackground(Color.LIGHT_GRAY);
 
-    // Desabilita os botões, caso você tenha botões como "Salvar" ou "Editar"
-    btnSalvar.setEnabled(false);
-    btnCancelar.setEnabled(false);
-    btnSalvar.setBackground(Color.lightGray);
-    btnCancelar.setBackground(Color.lightGray);
+       
+       // habilita os campos para edição
+       cmbTipo.setEditable(false);
+       txtNome.setEditable(false);
+       txtCPF.setEditable(false);
+       txtRazSocial.setEditable(false);
+       txtCNPJ.setEditable(false);
+       txtTelefone.setEditable(false);
+       txtEmail.setEditable(false);
+       txtEndereco.setEditable(false);
+       
+
+       // Habilitar os botões de salvar e cancelar
+        btnSalvar.setEnabled(false);
+        btnCancelar.setEnabled(false);
+        btnSalvar.setBackground(Color.LIGHT_GRAY);
+        btnCancelar.setBackground(Color.LIGHT_GRAY);
     
     
 }
    
    
+   public void desabilitarPF(){
+        pnlNome.setBackground(Color.LIGHT_GRAY);
+        pnlCPF.setBackground(Color.LIGHT_GRAY);
+        txtNome.setEditable(false);
+        txtCPF.setEditable(false);
+   }
    
-    
-               
-        
+   
+   public void desabilitarPJ(){
+        pnlRazSocial.setBackground(Color.LIGHT_GRAY);
+        pnlCNPJ.setBackground(Color.LIGHT_GRAY);
+        txtRazSocial.setEditable(false);
+        txtCNPJ.setEditable(false);
+   }
+   
+   
+   public void cadastrarCliente(){
+       if(verificarCampos()){
+            try{
+                
+                // instancia do controlador
+                ControleClientes contcli = new ControleClientes();
+                
+                // Tentando passar os dados
+                contcli.cadastrarCliente(this,
+                this.tipo,
+                this.nome,
+		this.cpf,
+                this.razsocial,
+                this.cnpj,
+                this.telefone,
+                this.email,
+                this.endereco,
+                this.id
+                );
+                
+                limparCampos();
+                
+            } catch (IllegalArgumentException e) {
+            // Exibe a mensagem de erro gerada pela validação do modelo (por exemplo, CPF inválido)
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            
+            } catch (Exception e) {
+            // Exibe uma mensagem genérica em caso de outros erros
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+            
+            }
+        }
+   }
+   
+   
+   public void editarCliente(){
+       if(verificarCampos()){
+            try{
+                
+                // instancia do controlador
+                ControleClientes contcli = new ControleClientes();
+                
+                // Tentando passar os dados
+                contcli.editarCliente(this,
+                this.tipo,
+                this.nome,
+		this.cpf,
+                this.razsocial,
+                this.cnpj,
+                this.telefone,
+                this.email,
+                this.endereco,
+                this.id
+                );
+                
+                limparCampos();
+                
+            }catch (IllegalArgumentException e) {
+            // Exibe a mensagem de erro gerada pela validação do modelo (por exemplo, CPF inválido)
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            
+            } catch (Exception e) {
+            // Exibe uma mensagem genérica em caso de outros erros
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+            }
+        }
+    }
+
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -181,13 +285,13 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
         jpnFundo = new util.elementos.PainelGradienteCadastro();
         pnlNome = new PainelRedondo();
         lblNome = new javax.swing.JLabel();
-        pnlCPF_CNPJ = new PainelRedondo();
-        CPF_CNPJ = new javax.swing.JLabel();
+        pnlCPF = new PainelRedondo();
+        lblCPF = new javax.swing.JLabel();
         pnlEndereco = new PainelRedondo();
         lblEndereco = new javax.swing.JLabel();
         pnlTelefone = new PainelRedondo();
         lblTelefone = new javax.swing.JLabel();
-        txtNomeRazao = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         txtEndereco = new javax.swing.JTextField();
         pnlEmail = new PainelRedondo();
         lblEmail = new javax.swing.JLabel();
@@ -197,8 +301,14 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
         cmbTipo = new javax.swing.JComboBox<>();
         btnSalvar = new util.elementos.BotaoPrincipal();
         btnCancelar = new util.elementos.BotaoPrincipal();
-        txtCpfCnpj = new javax.swing.JFormattedTextField();
+        txtCNPJ = new javax.swing.JFormattedTextField();
         txtTelefone = new javax.swing.JFormattedTextField();
+        pnlCNPJ = new PainelRedondo();
+        lblCNPJ = new javax.swing.JLabel();
+        txtCPF = new javax.swing.JFormattedTextField();
+        pnlRazSocial = new PainelRedondo();
+        lblRazSocial = new javax.swing.JLabel();
+        txtRazSocial = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Cliente");
@@ -218,14 +328,14 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
         lblNome.setText("Nome");
         pnlNome.add(lblNome, java.awt.BorderLayout.CENTER);
 
-        pnlCPF_CNPJ.setBackground(new java.awt.Color(48, 58, 95));
-        pnlCPF_CNPJ.setLayout(new java.awt.BorderLayout());
+        pnlCPF.setBackground(new java.awt.Color(48, 58, 95));
+        pnlCPF.setLayout(new java.awt.BorderLayout());
 
-        CPF_CNPJ.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
-        CPF_CNPJ.setForeground(new java.awt.Color(255, 255, 255));
-        CPF_CNPJ.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CPF_CNPJ.setText("CPF");
-        pnlCPF_CNPJ.add(CPF_CNPJ, java.awt.BorderLayout.CENTER);
+        lblCPF.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblCPF.setForeground(new java.awt.Color(255, 255, 255));
+        lblCPF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCPF.setText("CPF");
+        pnlCPF.add(lblCPF, java.awt.BorderLayout.CENTER);
 
         pnlEndereco.setBackground(new java.awt.Color(48, 58, 95));
         pnlEndereco.setLayout(new java.awt.BorderLayout());
@@ -245,7 +355,7 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
         lblTelefone.setText("Telefone");
         pnlTelefone.add(lblTelefone, java.awt.BorderLayout.CENTER);
 
-        txtNomeRazao.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+        txtNome.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
 
         txtEndereco.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
 
@@ -295,12 +405,12 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
         });
 
         try {
-            txtCpfCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            txtCNPJ.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txtCpfCnpj.setToolTipText("");
-        txtCpfCnpj.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+        txtCNPJ.setToolTipText("");
+        txtCNPJ.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
 
         try {
             txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
@@ -309,42 +419,82 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
         }
         txtTelefone.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
 
+        pnlCNPJ.setBackground(new java.awt.Color(48, 58, 95));
+        pnlCNPJ.setLayout(new java.awt.BorderLayout());
+
+        lblCNPJ.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblCNPJ.setForeground(new java.awt.Color(255, 255, 255));
+        lblCNPJ.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCNPJ.setText("CNPJ");
+        pnlCNPJ.add(lblCNPJ, java.awt.BorderLayout.CENTER);
+
+        try {
+            txtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtCPF.setToolTipText("");
+        txtCPF.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+
+        pnlRazSocial.setBackground(new java.awt.Color(48, 58, 95));
+        pnlRazSocial.setLayout(new java.awt.BorderLayout());
+
+        lblRazSocial.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        lblRazSocial.setForeground(new java.awt.Color(255, 255, 255));
+        lblRazSocial.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRazSocial.setText("Razão Social");
+        pnlRazSocial.add(lblRazSocial, java.awt.BorderLayout.CENTER);
+
+        txtRazSocial.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jpnFundoLayout = new javax.swing.GroupLayout(jpnFundo);
         jpnFundo.setLayout(jpnFundoLayout);
         jpnFundoLayout.setHorizontalGroup(
             jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnFundoLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jpnFundoLayout.createSequentialGroup()
+                        .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtEndereco))
                     .addGroup(jpnFundoLayout.createSequentialGroup()
                         .addComponent(pnlTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(cmbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(pnlCPF_CNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCpfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpnFundoLayout.createSequentialGroup()
-                        .addComponent(pnlNome, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtNomeRazao))
+                        .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpnFundoLayout.createSequentialGroup()
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpnFundoLayout.createSequentialGroup()
-                        .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnFundoLayout.createSequentialGroup()
+                                .addComponent(pnlTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtTelefone))
+                            .addGroup(jpnFundoLayout.createSequentialGroup()
+                                .addComponent(pnlNome, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnFundoLayout.createSequentialGroup()
+                                .addComponent(pnlRazSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtRazSocial)))
                         .addGap(18, 18, 18)
-                        .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpnFundoLayout.createSequentialGroup()
-                        .addComponent(pnlTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(pnlEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtEmail)))
-                .addGap(48, 48, 48))
+                        .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jpnFundoLayout.createSequentialGroup()
+                                .addComponent(pnlCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpnFundoLayout.createSequentialGroup()
+                                .addComponent(pnlCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpnFundoLayout.createSequentialGroup()
+                                .addComponent(pnlEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtEmail)))))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         jpnFundoLayout.setVerticalGroup(
             jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,14 +502,21 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
                 .addGap(49, 49, 49)
                 .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(pnlCPF_CNPJ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtCpfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
-                .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNomeRazao, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(pnlNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnlCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(pnlRazSocial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtRazSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40)
                 .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -370,11 +527,11 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
                 .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(70, 70, 70)
+                .addGap(54, 54, 54)
                 .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -398,36 +555,11 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         
-        if(verificarCampos()){
-            try{
-                
-                // instancia do controlador
-                ControleClientes contcli = new ControleClientes();
-                
-                // Tentando passar os dados
-                contcli.cadastrarCliente(this,
-                this.tipo,
-                this.cpf_cpnj,
-                this.nome,
-                this.telefone,
-                this.email,
-                this.endereco
-                );
-                
-                limparCampos();
-                
-            } catch (IllegalArgumentException e) {
-            // Exibe a mensagem de erro gerada pela validação do modelo (por exemplo, CPF inválido)
-            JOptionPane.showMessageDialog(this, e.getMessage());
-            
-            } catch (Exception e) {
-            // Exibe uma mensagem genérica em caso de outros erros
-            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
-            
-            }
-        }
-        
-        
+         if (modoEdicao) {
+            editarCliente();  // Se estiver no modo de edição, atualiza o cliente
+        } else {
+            cadastrarCliente();  // Caso contrário, realiza o cadastro
+        }   
         
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -477,26 +609,32 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel CPF_CNPJ;
-    private util.elementos.BotaoPrincipal btnCancelar;
-    private util.elementos.BotaoPrincipal btnSalvar;
+    public util.elementos.BotaoPrincipal btnCancelar;
+    public util.elementos.BotaoPrincipal btnSalvar;
     public javax.swing.JComboBox<String> cmbTipo;
     private javax.swing.JPanel jpnFundo;
+    private javax.swing.JLabel lblCNPJ;
+    private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblEndereco;
     private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblRazSocial;
     private javax.swing.JLabel lblTelefone;
     private javax.swing.JLabel lblTipo;
-    public javax.swing.JPanel pnlCPF_CNPJ;
+    public javax.swing.JPanel pnlCNPJ;
+    public javax.swing.JPanel pnlCPF;
     public javax.swing.JPanel pnlEmail;
     public javax.swing.JPanel pnlEndereco;
     public javax.swing.JPanel pnlNome;
+    public javax.swing.JPanel pnlRazSocial;
     public javax.swing.JPanel pnlTelefone;
     public javax.swing.JPanel pnlTipo;
-    public javax.swing.JFormattedTextField txtCpfCnpj;
+    public javax.swing.JFormattedTextField txtCNPJ;
+    public javax.swing.JFormattedTextField txtCPF;
     public javax.swing.JTextField txtEmail;
     public javax.swing.JTextField txtEndereco;
-    public javax.swing.JTextField txtNomeRazao;
+    public javax.swing.JTextField txtNome;
+    public javax.swing.JTextField txtRazSocial;
     public javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }
