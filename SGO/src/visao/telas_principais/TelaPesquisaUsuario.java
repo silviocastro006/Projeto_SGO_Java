@@ -130,6 +130,8 @@ public class TelaPesquisaUsuario extends TelaPesquisaPadrao{
                 TelaPrincipal principal = (TelaPrincipal) SwingUtilities.getWindowAncestor(TelaPesquisaUsuario.this);
                 principal.cadastro_usuario.setTitle("Cadastro de Usuário");
                 principal.cadastro_usuario.habilitarCampos();
+                principal.cadastro_usuario.cmbCargo.setEnabled(true);
+                principal.cadastro_usuario.cmbCargo.setEditable(false);
                 principal.cadastro_usuario.limparCampos();
                 principal.cadastro_usuario.setVisible(true);
                 principal.cadastro_usuario.setLocation(20, 190);
@@ -335,6 +337,7 @@ public class TelaPesquisaUsuario extends TelaPesquisaPadrao{
 
                     // Exibe a tela de cadastro
                     principal.cadastro_usuario.setTitle("Visualiza Cadastro");
+                    principal.cadastro_usuario.cmbCargo.setEnabled(false);
                     principal.cadastro_usuario.setVisible(true);
                     principal.cadastro_usuario.setLocation(20, 190);  // Ajuste de localização, se necessário
                 }

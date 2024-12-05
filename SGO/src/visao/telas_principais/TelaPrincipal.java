@@ -33,6 +33,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private DrawerController drawer;
     
     // Criação das telas que serão inseridas no cardlayout
+    Dashboard teladash = new Dashboard();
     TelaPesquisaUsuario telapesuse = new TelaPesquisaUsuario();
     TelaPesquisaCliente telapescli = new TelaPesquisaCliente();
     TelaPesquisaVisita telapesvis = new TelaPesquisaVisita();
@@ -99,7 +100,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
            
             
             // Troca de painel no cardlayout
-            if (item == usuario_item) {
+            if (item == dashboard_item){
+                layout.show(CardPanel, "dashboard");
+                drawer.hide();
+            } else if (item == usuario_item) {
                 layout.show(CardPanel, "usuarios");
                 drawer.hide();
             } else if (item == cliente_item){
@@ -220,6 +224,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         
         // Adicionando a tela usuários no CardPanel
+        CardPanel.add(teladash,"dashboard");
         CardPanel.add(telapesuse,"usuarios");
         CardPanel.add(telapescli,"clientes");
         CardPanel.add(telapesvis,"visitas");

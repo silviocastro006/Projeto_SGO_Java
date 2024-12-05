@@ -143,11 +143,21 @@ public class TelaPesquisaPadrao extends javax.swing.JPanel {
         pnlPesquisa.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 102), 1, true));
 
         txtpesquisa.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        txtpesquisa.setForeground(new java.awt.Color(231, 231, 231));
         txtpesquisa.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtpesquisa.setToolTipText("Digite o nome do usuário");
+        txtpesquisa.setText("Pesquise por nome, cpf, cnpj ou email ...");
+        txtpesquisa.setToolTipText("");
         txtpesquisa.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtpesquisa.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtpesquisa.setMargin(new java.awt.Insets(2, 20, 2, 6));
+        txtpesquisa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtpesquisaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtpesquisaFocusLost(evt);
+            }
+        });
         txtpesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtpesquisaActionPerformed(evt);
@@ -309,14 +319,26 @@ public class TelaPesquisaPadrao extends javax.swing.JPanel {
         
     }//GEN-LAST:event_txtpesquisaKeyTyped
 
+    private void txtpesquisaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtpesquisaFocusGained
+        txtpesquisa.setText("");
+        txtpesquisa.setForeground(Color.black);
+    }//GEN-LAST:event_txtpesquisaFocusGained
+
+    private void txtpesquisaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtpesquisaFocusLost
+       if(txtpesquisa.getText().equals("")){
+           txtpesquisa.setForeground(new Color(231,231,231));
+           txtpesquisa.setText("Pesquise por nome, cpf, cnpj ou email ...");
+       }
+    }//GEN-LAST:event_txtpesquisaFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected util.elementos.BotaoPrincipal btnCadastrar;
     protected util.elementos.BotaoPrincipal btnEditar;
     protected util.elementos.BotaoPrincipal btnExcluir;
-    protected javax.swing.JLabel lblIcon;
+    public javax.swing.JLabel lblIcon;
     protected final javax.swing.JLabel lblLupa = new javax.swing.JLabel();
-    protected javax.swing.JLabel lblTitulo;
+    public javax.swing.JLabel lblTitulo;
     protected javax.swing.JPanel pnlBotoes;
     protected javax.swing.JPanel pnlPesquisa;
     protected javax.swing.JScrollPane scrlPane;

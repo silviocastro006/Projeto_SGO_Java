@@ -261,7 +261,7 @@ public class UsuariosDao {
     public ResultSet buscarEditar(int id){
         
         // Preparar a consulta SQL
-        String sql = "SELECT * FROM cliente WHERE id_cliente = ?";
+        String sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
         ResultSet rs = null;
         
          try {

@@ -42,10 +42,8 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
         initComponents();
         setLocation(20, 200);
         mascaraCampos();
-        habilitarCamposTotal();
-        
-        
- 
+        desabilitarPJ();
+        setTitle("Cadastro de Cliente");
     }      
     
     
@@ -65,32 +63,32 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
         // Remover formatações e capturar valores
         this.tipo = cmbTipo.getSelectedItem().toString();
         this.nome = txtNome.getText().trim();
-        this.cpf = txtCPF.getText().trim().replace(".", "").replace("-", "").replace("/", "");
+        this.cpf = txtCPF.getText().trim().replace(".", "").replace("-", "");
         this.razsocial = txtRazSocial.getText().trim();
-        this.cpf = txtCNPJ.getText().trim().replace(".", "").replace("-", "").replace("/", "");
+        this.cnpj = txtCNPJ.getText().trim().replace(".", "").replace("-", "").replace("/", "");
         this.telefone = txtTelefone.getText().trim().replace("(", "").replace(")", "").replace("-", "").replace(" ", "");
         this.email = txtEmail.getText().trim();
         this.endereco = txtEndereco.getText().trim();
         
        
         // Verificar campos obrigatórios
-        if(this.tipo.equals("PF") &&
-            this.cpf.isEmpty()||
-            this.nome.isEmpty() ||
-            this.telefone.isEmpty() ||
-            this.email.isEmpty() ||
-            this.endereco.isEmpty())
+        if(this.tipo.equals("PF") && (
+            this.cpf.equals("") ||
+            this.nome.equals("") ||
+            this.telefone.equals("") ||
+            this.email.equals("") ||
+            this.endereco.equals("")))
         {
             JOptionPane.showMessageDialog(this, "Favor preencher todos os dados de Pessoa Física.");
             return false;
         }
         
-        if(this.tipo.equals("PJ") &&
-            this.cnpj.isEmpty() ||
-            this.razsocial.isEmpty() ||
-            this.telefone.isEmpty() ||
-            this.email.isEmpty() ||
-            this.endereco.isEmpty())
+        if(this.tipo.equals("PJ") && (
+            this.cnpj.equals("") ||
+            this.razsocial.equals("") ||
+            this.telefone.equals("") ||
+            this.email.equals("") ||
+            this.endereco.equals("")))
         {
             JOptionPane.showMessageDialog(this, "Favor preencher todos os dados de Pessoa Jurídica.");
             return false;
@@ -102,7 +100,7 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
     
    public void mascaraCampos(){
         
-       DefaultFormatterFactory formatoCPF = (DefaultFormatterFactory) txtCPF.getFormatterFactory();
+        DefaultFormatterFactory formatoCPF = (DefaultFormatterFactory) txtCPF.getFormatterFactory();
         DefaultFormatterFactory formatoCNPJ = (DefaultFormatterFactory) txtCNPJ.getFormatterFactory();
         DefaultFormatterFactory formatoTelefone = (DefaultFormatterFactory) txtTelefone.getFormatterFactory();
         
@@ -134,8 +132,18 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
        pnlEndereco.setBackground(new Color(48,58,95));
 
        
-       // habilita os campos para edição
-       cmbTipo.setEditable(true);
+       // habilita os campos
+       cmbTipo.setEnabled(true);
+       txtNome.setEnabled(true);
+       txtCPF.setEnabled(true);
+       txtRazSocial.setEnabled(true);
+       txtCNPJ.setEnabled(true);
+       txtTelefone.setEnabled(true);
+       txtEmail.setEnabled(true);
+       txtEndereco.setEnabled(true);
+
+
+        // habilita os campos para edição
        txtNome.setEditable(true);
        txtCPF.setEditable(true);
        txtRazSocial.setEditable(true);
@@ -179,27 +187,23 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
 
        // Habilitar os botões de salvar e cancelar
         btnSalvar.setEnabled(false);
-        btnCancelar.setEnabled(false);
         btnSalvar.setBackground(Color.LIGHT_GRAY);
-        btnCancelar.setBackground(Color.LIGHT_GRAY);
-    
-    
 }
    
    
    public void desabilitarPF(){
         pnlNome.setBackground(Color.LIGHT_GRAY);
         pnlCPF.setBackground(Color.LIGHT_GRAY);
-        txtNome.setEditable(false);
-        txtCPF.setEditable(false);
+        txtNome.setEnabled(false);
+        txtCPF.setEnabled(false);
    }
    
    
    public void desabilitarPJ(){
         pnlRazSocial.setBackground(Color.LIGHT_GRAY);
         pnlCNPJ.setBackground(Color.LIGHT_GRAY);
-        txtRazSocial.setEditable(false);
-        txtCNPJ.setEditable(false);
+        txtRazSocial.setEnabled(false);
+        txtCNPJ.setEnabled(false);
    }
    
    
@@ -210,8 +214,9 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
                 // instancia do controlador
                 ControleClientes contcli = new ControleClientes();
                 
-                // Tentando passar os dados
-                contcli.cadastrarCliente(this,
+                // Tentando passar os dados      
+                contcli.cadastrarCliente(
+                this,
                 this.tipo,
                 this.nome,
 		this.cpf,
@@ -219,8 +224,7 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
                 this.cnpj,
                 this.telefone,
                 this.email,
-                this.endereco,
-                this.id
+                this.endereco
                 );
                 
                 limparCampos();
@@ -246,7 +250,8 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
                 ControleClientes contcli = new ControleClientes();
                 
                 // Tentando passar os dados
-                contcli.editarCliente(this,
+                contcli.editarCliente(
+                this,
                 this.tipo,
                 this.nome,
 		this.cpf,
@@ -381,6 +386,12 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
 
         cmbTipo.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PF", "PJ" }));
+        cmbTipo.setFocusable(false);
+        cmbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setBackground(new java.awt.Color(58, 109, 43));
         btnSalvar.setForeground(new java.awt.Color(255, 255, 255));
@@ -560,8 +571,22 @@ public class JdlCadastroCliente extends javax.swing.JDialog {
         } else {
             cadastrarCliente();  // Caso contrário, realiza o cadastro
         }   
-        
+                                  
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void cmbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoActionPerformed
+
+        if(cmbTipo.getSelectedItem().equals("PF")){
+            limparCampos();
+            habilitarCamposTotal();
+            desabilitarPJ();
+            
+        } else{
+            limparCampos();
+            habilitarCamposTotal();
+            desabilitarPF();
+        }
+    }//GEN-LAST:event_cmbTipoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -29,6 +29,7 @@ public class ControleClientes {
     public void cadastrarCliente(JdlCadastroCliente telaCadastro, Object... values) throws Exception{
         
         try{
+                                    
         // Passo os atributos para o modelo
             mcli.setTipo_cliente((String) values[0]);
             mcli.setNome_cliente((String) values[1]);
@@ -38,18 +39,14 @@ public class ControleClientes {
             mcli.setTelefone_cliente((String) values[5]);
             mcli.setEmail_cliente((String) values[6]);
             mcli.setEndereco_cliente((String) values[7]);
+
             
-           
-        
         ClientesDao clientesdao = new ClientesDao();
         // Usando a instância da TelaPrincipal que já existe
         
-        String tipocliente = mcli.getTipo_cliente();
-        System.out.println(tipocliente);
-        
-        
+                
         clientesdao.cadastrarCliente(
-            telaCadastro,
+            telaCadastro,    
             mcli.getTipo_cliente(),
             mcli.getNome_cliente(),
             mcli.getCpf(),
@@ -59,7 +56,7 @@ public class ControleClientes {
             mcli.getEmail_cliente(),
             mcli.getEndereco_cliente()
         );
-        
+                            
          } catch (IllegalArgumentException e) {
             // Captura a exceção de validação e propaga a exceção para o chamador
             throw new IllegalArgumentException("Erro de validação: " + e.getMessage(), e);
@@ -72,7 +69,7 @@ public class ControleClientes {
                 
     } 
     
-    public void editarCliente(JdlCadastroCliente telaEditar, String tipoCliente, Object... values) throws Exception{
+    public void editarCliente(JdlCadastroCliente telaEditar, Object... values) throws Exception{
         
          try{
         // Passo os atributos para o modelo
@@ -97,7 +94,8 @@ public class ControleClientes {
             mcli.getCnpj(),
             mcli.getTelefone_cliente(),
             mcli.getEmail_cliente(),
-            mcli.getEndereco_cliente()
+            mcli.getEndereco_cliente(),
+            mcli.getId_cliente()
         );
         
          } catch (IllegalArgumentException e) {

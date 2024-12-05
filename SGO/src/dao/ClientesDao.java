@@ -29,19 +29,20 @@ public class ClientesDao {
     String sql;
     PreparedStatement stm;
     
-    public void cadastrarCliente(JdlCadastroCliente telaCadastro, String tipoCliente, Object... values) {
-        
-        // Statemente para cadastrar usuário
+    public void cadastrarCliente(JdlCadastroCliente telaCadastro, Object... values) {
+                
+        // Statemente para cadastrar cliente
         sql = "INSERT INTO cliente ("
-                + "tipo_cliente,"
-                + "nome_cliente,"
-                + "cpf,"
-                + "raz_social,"
-                + "cnpj,"
-                + "telefone_cliente,"
-                + "email_cliente,"
-                + "endereco_cliente)"
-                + "VALUES(?,?,?,?,?,?,?,?)";
+                + "tipo_cliente, "
+                + "nome_cliente, "
+                + "cpf, "
+                + "raz_social, "
+                + "cnpj, "
+                + "telefone_cliente, "
+                + "email_cliente, "
+                + "endereco_cliente) "
+                + "VALUES(?,?,?,?,?,?,?,?);";
+      
         
         Connection conn = null;
         
@@ -72,7 +73,7 @@ public class ClientesDao {
             JOptionPane.showMessageDialog(telaCadastro, "Cliente cadastrado com sucesso");
             
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(telaCadastro, "Erro ao  cadastrar cliente "+e.getMessage());
+            JOptionPane.showMessageDialog(telaCadastro, "Erro ao cadastrar cliente "+e.getMessage());
             
         } finally{
             
@@ -85,7 +86,7 @@ public class ClientesDao {
     public void excluirCliente(JdlCadastroCliente telaCadastro, int id){
         
         // Prepara a query
-        String sql = "DELETE FROM cliente WHERE id_cliente = ?";
+        String sql = "UPDATE cliente SET deletado = ? WHERE id_cliente = ?";
 
         try  {
 
@@ -96,7 +97,8 @@ public class ClientesDao {
                 // Criando um statement
                 stm = conn.prepareStatement(sql);
 
-                stm.setInt(1, id); // Passa o ID do usuário para a consulta
+                stm.setBoolean(1, true);
+                stm.setInt(2, id); // Passa o ID do usuário para a consulta
 
                 int rowsAffected = stm.executeUpdate(); // Executa a exclusão
 
@@ -111,19 +113,19 @@ public class ClientesDao {
         
     }
     
-    public void editarCliente(JdlCadastroCliente telaEditar, String tipoCliente, Object... values){
+    public void editarCliente(JdlCadastroCliente telaEditar, Object... values){
        
         // Statemente para cadastrar usuário
         sql = "UPDATE cliente SET "
-                + "tipo_cliente,"
-                + "nome_cliente,"
-                + "cpf,"
-                + "raz_social,"
-                + "cnpj,"
-                + "telefone_cliente,"
-                + "email_cliente,"
-                + "endereco_cliente)"
-                + "WHERE id_usuario = ?;";
+                + "tipo_cliente = ?,"
+                + "nome_cliente = ?,"
+                + "cpf = ?,"
+                + "raz_social = ?,"
+                + "cnpj = ?,"
+                + "telefone_cliente = ?,"
+                + "email_cliente = ?,"
+                + "endereco_cliente = ? "
+                + "WHERE id_cliente = ?;";
         
         Connection conn = null;
         
@@ -173,9 +175,9 @@ public class ClientesDao {
         List<ModeloClientes> lista_cliente = new ArrayList<>();
         
         // Criação de String sql para consulta
-        String sql = "Select id_cliente, tipo_cliente, nome_cliente, "
+        String sql = "SELECT id_cliente, tipo_cliente, nome_cliente, "
                 + "cpf, raz_social, cnpj, "
-                + "telefone_cliente, email_cliente, endereco_cliente from cliente;";
+                + "telefone_cliente, email_cliente, endereco_cliente FROM cliente WHERE deletado != true;";
         
         Connection conn = null;
         ResultSet rs = null;
@@ -197,7 +199,7 @@ public class ClientesDao {
                     cliente.setNome_cliente(rs.getString("nome_cliente"));
                     cliente.setCpf(rs.getString("cpf"));
                     cliente.setRaz_social(rs.getString("raz_social"));
-                    cliente.setCnpj(rs.getString("raz_social"));
+                    cliente.setCnpj(rs.getString("cnpj"));
                     cliente.setTelefone_cliente(rs.getString("telefone_cliente"));
                     cliente.setEmail_cliente(rs.getString("email_cliente"));
                     cliente.setEndereco_cliente(rs.getString("endereco_cliente"));
@@ -244,7 +246,7 @@ public class ClientesDao {
                     cliente.setNome_cliente(rs.getString("nome_cliente"));
                     cliente.setCpf(rs.getString("cpf"));
                     cliente.setRaz_social(rs.getString("raz_social"));
-                    cliente.setCnpj(rs.getString("raz_social"));
+                    cliente.setCnpj(rs.getString("cnpj"));
                     cliente.setTelefone_cliente(rs.getString("telefone_cliente"));
                     cliente.setEmail_cliente(rs.getString("email_cliente"));
                     cliente.setEndereco_cliente(rs.getString("endereco_cliente"));

@@ -14,6 +14,7 @@ public class ModeloClientes {
     String telefone_cliente;
     String email_cliente;
     String endereco_cliente;
+    Boolean deletado;
 
     public int getId_cliente() {
         return id_cliente;
@@ -36,6 +37,18 @@ public class ModeloClientes {
     }
 
     public void setNome_cliente(String nome_cliente) {
+        // se o campo já tiver sido criado e tem um traço
+        
+        if(nome_cliente.equals("-")){
+            this.nome_cliente = "-";
+            return;
+        }
+        
+        if (nome_cliente.length() == 0) {
+            this.nome_cliente = "-";
+            return;
+        }
+        
         this.nome_cliente = nome_cliente;
     }
 
@@ -45,17 +58,22 @@ public class ModeloClientes {
 
     public void setCpf(String cpf) {
         
+        // se o campo já tiver sido criado e tem um traço
+        if(cpf.equals("-")){
+            this.cpf = "-";
+            return;
+        }
+        
         // Se o CPF for vazio ou nulo, define como null
-        if (cpf == null || cpf.equals("")) {
-            this.cpf = null;
+        if (cpf == null || cpf.equals("") || cpf.contains(" ")) {
+            this.cpf = "-";
             return;  // Não valida se o CPF é nulo ou vazio
         }
-
-        // Se for um CPF válido, define o valor
+                
         if (ValidarCPF.validarCPF(cpf)) {
             this.cpf = cpf;
         } else {
-            throw new IllegalArgumentException("CPF inválido");
+            throw new IllegalArgumentException("CPF inválido o erro é no model");
         }
     }
 
@@ -64,6 +82,16 @@ public class ModeloClientes {
     }
 
     public void setRaz_social(String raz_social) {
+        // se o campo já tiver sido criado e tem um traço
+        if(raz_social.equals("-")){
+            this.raz_social = "-";
+            return;
+        }
+        
+        if (raz_social == null || raz_social.equals("")) {
+            this.raz_social = "-";
+            return;  // Não valida se o CNPJ é nulo ou vazio
+        }
         this.raz_social = raz_social;
     }
 
@@ -72,10 +100,16 @@ public class ModeloClientes {
     }
 
     public void setCnpj(String cnpj) {
+        // se o campo já tiver sido criado e tem um traço
+        
+        if(cnpj.equals("-")){
+            this.cnpj = "-";
+            return;
+        }
         
         // Se o CNPJ for vazio ou nulo, define como null
-        if (cnpj == null || cnpj.equals("")) {
-            this.cnpj = null;
+        if (cnpj == null || cnpj.equals("") || cnpj.contains(" ")) {
+            this.cnpj = "-";
             return;  // Não valida se o CNPJ é nulo ou vazio
         }
 
@@ -83,7 +117,7 @@ public class ModeloClientes {
         if (ValidarCNPJ.validarCNPJ(cnpj)) {  // Corrigido para usar o Validador de CNPJ
             this.cnpj = cnpj;
         } else {
-            throw new IllegalArgumentException("CNPJ inválido");
+            throw new IllegalArgumentException("CNPJ inválido o erro é no model");
         }
     }
 
@@ -110,4 +144,14 @@ public class ModeloClientes {
     public void setEndereco_cliente(String endereco_cliente) {
         this.endereco_cliente = endereco_cliente;
     }
+
+    public Boolean getDeletado() {
+        return deletado;
+    }
+
+    public void setDeletado(Boolean deletado) {
+        this.deletado = deletado;
+    }
+    
+    
 }

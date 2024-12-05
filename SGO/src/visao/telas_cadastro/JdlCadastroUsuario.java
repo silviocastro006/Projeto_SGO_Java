@@ -42,6 +42,7 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
         setLocation(20, 200);
         mascaraCampos();
         habilitarCampos();
+        this.cmbCargo.setEditable(false);
  
     }
     
@@ -469,7 +470,8 @@ public class JdlCadastroUsuario extends javax.swing.JDialog {
                 ControleUsuarios contuser = new ControleUsuarios();
                 
                 // Tentando passar os dados
-                contuser.cadastrarUsuario(this,
+                contuser.cadastrarUsuario(
+                this,
                 this.nome,
                 this.cpf,
 		this.endereco,

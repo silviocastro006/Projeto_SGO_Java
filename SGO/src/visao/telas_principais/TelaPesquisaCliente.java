@@ -4,6 +4,7 @@
  */
 package visao.telas_principais;
 
+// Importações necessárias
 import controle.ControleClientes;
 import controle.ControleUsuarios;
 import java.awt.Color;
@@ -19,31 +20,30 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import visao.telas_cadastro.JdlCadastroCliente;
 
-/**
- *
- * @author acer
- */
+
 public class TelaPesquisaCliente extends TelaPesquisaPadrao{
     public TelaPesquisaCliente() {
         
-        // Edição da tabela
+        // Edição da tabela padrão para ser usada em clientes
         tblConteudo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Tipo", "Nome", "Razao Social", "CPF", "CNPJ","Telefone","Email","Endereço"
+                "Codigo", "Tipo", "Nome", "Razao Social", "CPF", "CNPJ", "Telefone", "Email", "Endereço" // colunas da tabela
             }
         ){boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false,false
+                false, false, false, false, false, false, false, false,false // não permitir editar celular
         };
         
         @Override
-        public boolean isCellEditable(int rowIndex, int columnIndex) {
+        public boolean isCellEditable(int rowIndex, int columnIndex) { // não permitir editar celular
                 return canEdit [columnIndex];
             }
         });
         
+        
+        // Configurações da tabela
         tblConteudo.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
 
         tblConteudo.setFocusable(false);
@@ -68,16 +68,13 @@ public class TelaPesquisaCliente extends TelaPesquisaPadrao{
         // Edição do icone da tela
         lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_padrao/clientes_azul_80.png")));
         
-        // inserir as funções aqui
-        
+        // Instanciar as funções no construtor
         acaoBotoes();
         popularTabela();
         campoPesquisa();
         ordenarColuna();
         selecaoTabela();
     }
-    
-    
     
     
     public void ordenarColuna() {
@@ -127,10 +124,13 @@ public class TelaPesquisaCliente extends TelaPesquisaPadrao{
                 
                // Usando a instância da TelaPrincipal que já existe
                 TelaPrincipal principal = (TelaPrincipal) SwingUtilities.getWindowAncestor(TelaPesquisaCliente.this);
-                principal.cadastro_cliente.setTitle("Cadastro de Usuário");
+                principal.cadastro_cliente.setTitle("Cadastro de Cliente");
                 principal.cadastro_cliente.btnSalvar.setText("Salvar");
+                principal.cadastro_cliente.cmbTipo.setSelectedItem("PF");
                 principal.cadastro_cliente.habilitarCamposTotal();
+                principal.cadastro_cliente.desabilitarPJ();
                 principal.cadastro_cliente.limparCampos();
+                principal.cadastro_cliente.modoEdicao = false;
                 principal.cadastro_cliente.setVisible(true);
                 principal.cadastro_cliente.setLocation(20, 190);
                 popularTabela();
@@ -156,6 +156,14 @@ public class TelaPesquisaCliente extends TelaPesquisaPadrao{
                     // Exibe a tela de cadastro
                     principal.cadastro_cliente.setTitle("Editar Cliente");
                     principal.cadastro_cliente.btnSalvar.setText("Atualizar");
+                    principal.cadastro_cliente.modoEdicao = true;
+                    if(principal.cadastro_cliente.cmbTipo.getSelectedItem().equals("PF")){
+                        principal.cadastro_cliente.desabilitarPJ();
+                        principal.cadastro_cliente.cmbTipo.setEnabled(false);
+                    } else{
+                        principal.cadastro_cliente.desabilitarPF();
+                        principal.cadastro_cliente.cmbTipo.setEnabled(false);
+                    }
                     principal.cadastro_cliente.setVisible(true);
                     principal.cadastro_cliente.setLocation(20, 190);  // Ajuste de localização, se necessário
                 
@@ -209,8 +217,6 @@ public class TelaPesquisaCliente extends TelaPesquisaPadrao{
     }
 
     
-    
-    
     @Override
     public void popularTabela() {
         try{
@@ -247,21 +253,21 @@ public class TelaPesquisaCliente extends TelaPesquisaPadrao{
         
                 // Verifica se a pesquisa contém apenas letras (pesquisa por nome)
                 if (pesquisa.matches("^[a-zA-Zà-úÀ-Ú ]+$")) {
-                    sql = "Select id_cliente, tipo_cliente, nome_cliente, "
+                    sql = "SELECT id_cliente, tipo_cliente, nome_cliente, "
                 + "cpf, raz_social, cnpj, "
-                + "telefone_cliente, email_cliente, endereco_cliente from cliente WHERE nome_usuario OR raz_social LIKE '" + pesquisa + "%';";
+                + "telefone_cliente, email_cliente, endereco_cliente FROM cliente WHERE (nome_cliente LIKE '" + pesquisa + "%' OR raz_social LIKE '" + pesquisa + "%') AND deletado != true;";
                 }
                 // Verifica se a pesquisa contém apenas números (pesquisa por CPF)
                 else if (pesquisa.matches("^[0-9]+$")) {
-                    sql = "Select id_cliente, tipo_cliente, nome_cliente, "
+                    sql = "SELECT id_cliente, tipo_cliente, nome_cliente, "
                 + "cpf, raz_social, cnpj, "
-                + "telefone_cliente, email_cliente, endereco_cliente from cliente WHERE cpf OR cnpj LIKE'" + pesquisa + "%';";
+                + "telefone_cliente, email_cliente, endereco_cliente FROM cliente WHERE (cpf LIKE '" + pesquisa + "%' OR cnpj LIKE '" + pesquisa + "%') AND deletado != true;";
                 }
                 // Verifica se a pesquisa contém um '@' (pesquisa por email)
                 else if (pesquisa.contains("@")) {
-                    sql = "Select id_cliente, tipo_cliente, nome_cliente, "
+                    sql = "SELECT id_cliente, tipo_cliente, nome_cliente, "
                 + "cpf, raz_social, cnpj, "
-                + "telefone_cliente, email_cliente, endereco_cliente from cliente WHERE email_cliente LIKE'%" + pesquisa + "%';";
+                + "telefone_cliente, email_cliente, endereco_cliente FROM cliente WHERE email_cliente LIKE '%" + pesquisa + "%' AND deletado != true;";
                 }
 
                 // Instanciar Controlador
@@ -334,7 +340,7 @@ public class TelaPesquisaCliente extends TelaPesquisaPadrao{
         String cnpj = (String) tblConteudo.getValueAt(row, 5);
         String telefone = (String) tblConteudo.getValueAt(row, 6);
         String email = (String) tblConteudo.getValueAt(row, 7);
-        String endereco = (String) tblConteudo.getValueAt(row, 7);
+        String endereco = (String) tblConteudo.getValueAt(row, 8);
 
         // Passa os dados para a tela de cadastro
         TelaPrincipal principal = (TelaPrincipal) SwingUtilities.getWindowAncestor(TelaPesquisaCliente.this);
