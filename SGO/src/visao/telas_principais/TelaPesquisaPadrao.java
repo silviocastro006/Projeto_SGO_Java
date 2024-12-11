@@ -4,19 +4,31 @@
  */
 package visao.telas_principais;
 
-import com.sun.jdi.connect.spi.Connection;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import java.io.FileOutputStream;
+import java.util.List;
 import dao.Conexao;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LinearGradientPaint;
+import java.io.FileOutputStream;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import util.funcoes.GeradorPDF;
 
 
 
@@ -98,9 +110,20 @@ public class TelaPesquisaPadrao extends javax.swing.JPanel {
         
     }
     
+    private List<String[]> pegarDadosTabela(JTable tabela) {
+    DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+    List<String[]> dados = new ArrayList<>();
+
+    for (int i = 0; i < model.getRowCount(); i++) {
+        String[] linha = new String[model.getColumnCount()];
+        for (int j = 0; j < model.getColumnCount(); j++) {
+            linha[j] = model.getValueAt(i, j).toString();
+        }
+        dados.add(linha);
+    }
+    return dados;
     
-    
-    
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,6 +144,7 @@ public class TelaPesquisaPadrao extends javax.swing.JPanel {
         btnCadastrar = new util.elementos.BotaoPrincipal();
         btnEditar = new util.elementos.BotaoPrincipal();
         btnExcluir = new util.elementos.BotaoPrincipal();
+        btnImprimir = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setOpaque(false);
@@ -264,6 +288,19 @@ public class TelaPesquisaPadrao extends javax.swing.JPanel {
                 .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/icones_pequenos/printer.png"))); // NOI18N
+        btnImprimir.setToolTipText("Imprimir");
+        btnImprimir.setActionCommand("");
+        btnImprimir.setBorder(null);
+        btnImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnImprimir.setFocusPainted(false);
+        btnImprimir.setFocusable(false);
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -271,14 +308,17 @@ public class TelaPesquisaPadrao extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrlPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblIcon)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblTitulo)
-                        .addGap(65, 65, 65)
-                        .addComponent(pnlPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblIcon)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblTitulo)
+                            .addGap(65, 65, 65)
+                            .addComponent(pnlPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(scrlPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1307, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -290,7 +330,9 @@ public class TelaPesquisaPadrao extends javax.swing.JPanel {
                     .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(pnlPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnlPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(39, 39, 39)
                 .addComponent(scrlPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
@@ -331,11 +373,22 @@ public class TelaPesquisaPadrao extends javax.swing.JPanel {
        }
     }//GEN-LAST:event_txtpesquisaFocusLost
 
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+         try {
+        List<String[]> dados = pegarDadosTabela(tblConteudo);
+        new GeradorPDF().gerarRelatorioPDF(dados);
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        javax.swing.JOptionPane.showMessageDialog(null, "Erro ao gerar o relatório: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_btnImprimirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected util.elementos.BotaoPrincipal btnCadastrar;
     protected util.elementos.BotaoPrincipal btnEditar;
     protected util.elementos.BotaoPrincipal btnExcluir;
+    private javax.swing.JButton btnImprimir;
     public javax.swing.JLabel lblIcon;
     protected final javax.swing.JLabel lblLupa = new javax.swing.JLabel();
     public javax.swing.JLabel lblTitulo;

@@ -4,6 +4,7 @@
  */
 package visao.telas_principais;
 
+// Importação de bibliotecas
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -22,6 +23,8 @@ public class Dashboard extends javax.swing.JPanel {
         initComponents();
     }
     
+    
+    // Sobrescrição do componente de pintura do fundo da tela
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
